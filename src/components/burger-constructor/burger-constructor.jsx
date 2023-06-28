@@ -2,38 +2,12 @@ import {React} from 'react';
 import PropTypes from 'prop-types';
 import { ConstructorElement, Button, DragIcon, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
-
-const tempData = [
-  {
-    "text": "Соус традиционный галактический",
-    "price": 15,
-    "img": "https://code.s3.yandex.net/react/code/sauce-03.png"
-  },
-  {
-    "text": "Мясо бессмертных моллюсков Protostomia",
-    "price": 1337,
-    "img": "https://code.s3.yandex.net/react/code/meat-02.png"
-  },
-  {
-    "text": "Плоды Фалленианского дерева",
-    "price": 874,
-    "img": "https://code.s3.yandex.net/react/code/sp_1.png"
-  },
-  {
-    "text": "Хрустящие минеральные кольца",
-    "price": 300,
-    "img": "https://code.s3.yandex.net/react/code/mineral_rings.png"
-  },
-  {
-    "text": "Хрустящие минеральные кольца",
-    "price": 300,
-    "img": "https://code.s3.yandex.net/react/code/mineral_rings.png"
-  }
-]
+import {tempData} from '../../utils/temp-data';
 
 
 
-function BurgerConstructor() {
+
+function BurgerConstructor({data = tempData}) {
 
   const total = 610;
 
@@ -50,7 +24,7 @@ function BurgerConstructor() {
         />
 
         <div className={`${styles.content} ${styles.scrollbar}`}>
-          {tempData.map((elem, index) => ( 
+          {data.map((elem, index) => ( 
  
               <div key={index} className={styles.dragable}>
                 <DragIcon type="primary" />         
@@ -86,6 +60,16 @@ function BurgerConstructor() {
       </div>
     </section>
   );
+}
+
+BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired
+      }).isRequired
+    )
 }
 
 

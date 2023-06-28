@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from 'prop-types';
+import { typeOfIngredient } from '../../../utils/type';
 import IngredientCard from "./ingredient-card/ingredient-card";
 import styles from './ingredients.module.css';
 
@@ -45,5 +47,11 @@ function Ingredients({ingredients}) {
         </div>
     );
 }
+
+Ingredients.propTypes = {
+    ingredients: PropTypes.arrayOf(
+      typeOfIngredient
+    )
+  }
 
 export default Ingredients;
