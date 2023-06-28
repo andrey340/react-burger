@@ -1,0 +1,10 @@
+.tabs {
+    display: flex;
+    flex-flow: row;
+}
+
+.section {
+    display: flex;
+    flex-flow: column;
+    width: 35%;
+}

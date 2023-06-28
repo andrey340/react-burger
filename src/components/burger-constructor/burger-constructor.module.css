@@ -1,0 +1,53 @@
+.section {
+    display: flex;
+    flex-flow: column;
+    width: 35%;
+}
+
+.ingredients {
+    display: flex;
+    height: 656px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    flex-shrink: 0; 
+}
+
+.constructor-element {
+    max-height: 80px;
+}
+
+.dragable {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+.content {
+    overflow: auto;
+}
+
+.scrollbar {
+    --scrollbar-foreground: #8585AD;
+    --scrollbar-background: #2F2F37;
+    --scrollbar-size: 8px;
+    /* плашка-бегунок, фон */
+    scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+  }
+  .scrollbar::-webkit-scrollbar {
+    width: var(--scrollbar-size); /* в основном для вертикальных полос прокрутки */
+    height: var(--scrollbar-size); /* в основном для горизонтальных полос прокрутки */
+  }
+  .scrollbar::-webkit-scrollbar-thumb { /* плашка-бегунок */
+    background: var(--scrollbar-foreground); /* фон */
+  }
+  .scrollbar::-webkit-scrollbar-track { /* фон */
+    background: var(--scrollbar-background);
+  }
+
+.total {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-end;
+}

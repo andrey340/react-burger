@@ -1,0 +1,18 @@
+.li {
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 272px;
+    position: relative;
+}
+
+.li:nth-child(n+3) {
+    margin-top: 32px;
+}
+
+.price {
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 24px;
+}
