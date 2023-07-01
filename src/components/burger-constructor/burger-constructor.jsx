@@ -1,18 +1,17 @@
-import {React} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ConstructorElement, Button, DragIcon, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import withModal from '../hocs/withModal';
 import styles from './burger-constructor.module.css';
-import {tempData} from '../../utils/temp-data';
+import {tempDataForConstructor} from '../../utils/temp-data-for-constructor';
 
-
-
-
-function BurgerConstructor({data = tempData}) {
+const WithModalButton = withModal(Button) 
+function BurgerConstructor({data = tempDataForConstructor}) {
 
   const total = 610;
 
   return (
-    <section className={`mt-25 ${styles.section}`}>
+      <section className={`mt-25 ${styles.section}`}>
       <div className={styles.ingredients}>
         <ConstructorElement
           type="top"
@@ -51,14 +50,14 @@ function BurgerConstructor({data = tempData}) {
       </div>
        
 
-      <div className={`mt-10 ${styles.total}`}>
-        <p className="text text_type_digits-medium mr-2">{total}</p>
-        <CurrencyIcon  type="primary" />
-        <Button htmlType="button" type="primary" size="large" extraClass='ml-10'>
-          Оформить заказ
-        </Button>
-      </div>
-    </section>
+        <div className={`mt-10 ${styles.total}`}>
+          <p className="text text_type_digits-medium mr-2">{total}</p>
+          <CurrencyIcon  type="primary" />
+          <WithModalButton htmlType="button" type="primary" size="large" extraClass='ml-10' modalType='order'>
+            Оформить заказ
+          </WithModalButton>
+        </div>
+      </section>
   );
 }
 

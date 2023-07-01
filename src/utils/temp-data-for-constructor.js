@@ -1,4 +1,4 @@
-export const tempData = [
+export const tempDataForConstructor = [
   {
     "text": "Соус традиционный галактический",
     "price": 15,
