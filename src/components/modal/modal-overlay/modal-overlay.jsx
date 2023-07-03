@@ -9,7 +9,7 @@ function ModalOverlay({children, onClose}) {
 }
 
 ModalOverlay.propTypes = {
-  error: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired
 }
 
 export default ModalOverlay;

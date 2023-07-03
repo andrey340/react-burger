@@ -7,7 +7,7 @@ import OrderDetails from '../modal/order-details/order-details';
 
 // Представим withToggle в виде обычного функционального компонента.
 const withModal = (WrappedComponent) => (props) => {
-    const {modalType = 'error', modalTitle = '', modalItem = {}, ...exProps} = props;
+    const { modalType = 'error', modalTitle = '', modalItem = {}, ...exProps } = props;
 
     const [showModal, setShowModal] = React.useState(false);
 
@@ -16,20 +16,20 @@ const withModal = (WrappedComponent) => (props) => {
 
     return (
         <>
-            <WrappedComponent {...exProps} onClick={ openModal } />
-            {showModal  && 
-                <Modal type={modalType} title={modalTitle} item={modalItem} Close={ closeModal } >
-                {
-                  {
-                    'error': <Error error='' />,
-                    'ingredient': Object.keys(modalItem).length === 0 ? <Error error='Не получено данных о ингридиенте...' /> : <IngredientDetails item={modalItem} /> ,
-                    'order': <OrderDetails />,
-                  }[modalType]
-                }
+            <WrappedComponent {...exProps} onClick={openModal} />
+            {showModal &&
+                <Modal type={modalType} title={modalTitle} item={modalItem} close={closeModal} >
+                    {
+                        {
+                            'error': <Error error='' />,
+                            'ingredient': Object.keys(modalItem).length === 0 ? <Error error='Не получено данных о ингридиенте...' /> : <IngredientDetails item={modalItem} />,
+                            'order': <OrderDetails />,
+                        }[modalType]
+                    }
                 </Modal>
             }
         </>
-        
+
     )
 };
 
@@ -41,6 +41,6 @@ withModal.propTypes = {
     modalTitle: PropTypes.string,
     modalItem: PropTypes.object
 }
-  
+
 
 export default withModal

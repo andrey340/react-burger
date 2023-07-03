@@ -16,22 +16,19 @@ function App() {
 
 
   const fetchData = () => {
-    setState({...state, data: [], isLoading: true})
-    fetch(API_URL) 
-    .then( res => { 
-      if(res.ok) {
-        res.json().then( data => { 
-          setState({...state, data: data.data, isLoading: false})  
+    fetch(API_URL)
+      .then((res) => {
+        if (res.ok) {  // проверили
+          return res.json();  // распарисили ответ
+        }
+        return Promise.reject(`Ошибка ${res.status}`);  // выкинули ошибку, если не `ok`
       })
-      } else {
-        const newState = {...state, data:[], isLoading: false, errorText: res.status + " " + res.statusText  }
-        setState(newState)
-      }
-    })
-    .catch( err =>  {
-      const newState = {...state, data:[], isLoading: false, errorText: String(err) }
-      setState(newState)
-    })
+      .then((data) => {  // тут пришли готовые данные
+        setState({ ...state, data: data.data, isLoading: false });
+      })
+      .catch((err) => {
+        setState({ ...state, data: [], isLoading: false, errorText: String(err) });
+      })
   }
 
   useEffect(() => {
@@ -42,19 +39,19 @@ function App() {
   const { data, isLoading, errorText } = state;
   return (
     <>
-    <AppHeader />
-    <main className={styles.main}>
-    { isLoading 
-    ? <h2>Идет загрузка данных...</h2> 
-    :  errorText !== '' 
-      ? 
-        <h2>Произошла ошибка: {errorText}</h2>
-      : <>
-        <BurgerIngredients ingredients={data}/>
-        <BurgerConstructor />
-      </> 
-    }
-    </main>
+      <AppHeader />
+      <main className={styles.main}>
+        {isLoading
+          ? <h2>Идет загрузка данных...</h2>
+          : errorText !== ''
+            ?
+            <h2>Произошла ошибка: {errorText}</h2>
+            : <>
+              <BurgerIngredients ingredients={data} />
+              <BurgerConstructor />
+            </>
+        }
+      </main>
     </>
   );
 }
