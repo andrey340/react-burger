@@ -3,17 +3,21 @@ import { useState, useCallback } from "react";
 export const useModal = () => {
     const [modalState, setModalState] = useState({
         isOpen: false,
-        type: 'error',
+        type: 'order',
         item: '',
-        errorText: '' 
+        title: ''
     });
-    const openModal = useCallback(() => {
-        setModalState({...modalState, isOpen: true});
+    const openModal = useCallback((type = 'order', item = {}, title = '') => {
+        setModalState({
+            isOpen: true,
+            type: type,
+            item: item,
+            title: title
+        });
     }, []);
 
     const closeModal = useCallback(() => {
-        setModalState({...modalState, isOpen: false});
-        console.log('close')
+        setModalState({ ...modalState, isOpen: false });
     }, []);
 
     return {

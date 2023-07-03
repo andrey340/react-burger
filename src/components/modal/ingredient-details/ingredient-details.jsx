@@ -1,12 +1,12 @@
 import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
 
-const IngredientDetails = ({item}) => {
-    return(
+const IngredientDetails = ({ item }) => {
+    return (
         <>
             <img className={`mt-15 mb-15 ml-10 mr-10 ${styles.img}`} src={item.image_large} />
             <span className="text text_type_main-default">{item.name}</span>
-            
+
             <div className={`mt-8 mb-5 ${styles.techs}`}>
                 <div>
                     <span className="text text_type_main-default text_color_inactive">Калории, ккал</span>
@@ -37,7 +37,7 @@ Error.propTypes = {
         proteins: PropTypes.number.isRequired,
         fat: PropTypes.number.isRequired,
         carbohydrates: PropTypes.number.isRequired,
-      }).isRequired
+    }).isRequired
 }
 
 export default IngredientDetails

@@ -4,16 +4,18 @@ import { typeOfIngredient } from '../../utils/type';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Ingredients from './ingredients/ingredients';
 import ingredientTypes from '../../utils/ingredient-types';
+import withModal from '../hocs/withModal';
 import styles from './burger-ingredients.module.css';
 
-function BurgerIngredients({ingredients}) {
+const WithModalIngredients = withModal(Ingredients)
+function BurgerIngredients({ ingredients, onClick }) {
   const [current, setCurrentTypeIngredient] = React.useState('bun')
 
   const renderTabs = (types) => {
     return (
       types.map((elem, index) => (
-        <Tab key={index} value={elem.type}  active={current === `${elem.type}`} onClick={() => setCurrentTypeIngredient(elem.type)}>
-         {elem.desc}
+        <Tab key={index} value={elem.type} active={current === `${elem.type}`} onClick={() => setCurrentTypeIngredient(elem.type)}>
+          {elem.desc}
         </Tab>
       ))
     )
@@ -26,12 +28,12 @@ function BurgerIngredients({ingredients}) {
       <p className="text text_type_main-large">
         Соберите бургер
       </p>
-        <div className={`mt-5 ${styles.tabs}`}>
-          {renderTabs(ingredientTypes)}
-        </div>
-          <Ingredients ingredients={ingredientsOfType} />
+      <div className={`mt-5 ${styles.tabs}`}>
+        {renderTabs(ingredientTypes)}
+      </div>
+      <WithModalIngredients ingredients={ingredientsOfType} />
     </section>
- 
+
   );
 }
 

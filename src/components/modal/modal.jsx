@@ -11,7 +11,7 @@ function Modal(props) {
   React.useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === 'Escape') {
-        props.close();
+        props.closeFunc();
       }
     }
 
@@ -27,32 +27,22 @@ function Modal(props) {
         <div className={`pt-10 pb-10 pr-10 pl-10 ${styles.modal}`}>
           <div className={styles.head}>
             <span className="text text_type_main-large mr-6">{props.title}</span>
-            <span className={`text text_type_main-medium ${styles.close}`} onClick={props.close}><CloseIcon type="primary" /></span>
+            <span className={`text text_type_main-medium ${styles.close}`} onClick={props.closeFunc}><CloseIcon type="primary" /></span>
           </div>
           <div className={styles.content}>
             {props.children}
           </div>
         </div>
       </div>
-      <ModalOverlay onClose={props.close} />
+      <ModalOverlay onClose={props.closeFunc} />
     </>
   ),
     modalRoot)
 }
 
-Modal.defaultProps = {
-  type: 'error',
-  item: {},
-  title: '',
-  error: 'Непредвиденная ошибка'
-}
-
 Modal.propTypes = {
-  type: PropTypes.string.isRequired,
   title: PropTypes.string,
-  error: PropTypes.string,
-  item: PropTypes.object,
-
+  closeFunc: PropTypes.func.isRequired
 }
 
 export default Modal;

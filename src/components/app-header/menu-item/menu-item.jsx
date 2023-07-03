@@ -5,16 +5,14 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function MenuItem(props) {
   return (
-
-   <Button htmlType="button" size="small" className={styles.button}>
-    <li onClick={props.onClick} className={ `p-1 ${styles.li} ${props.active && styles.active}` } >
+    <Button htmlType="button" size="small" className={styles.button}>
+      <li onClick={props.onClick} className={`p-1 ${styles.li} ${props.active && styles.active}`} >
         {props.children}
         <div className='text text_type_main-default p-2'>
-            {props.text}
+          {props.text}
         </div>
-    </li>
-   </Button>
-
+      </li>
+    </Button>
   );
 }
 

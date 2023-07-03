@@ -1,30 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../modal/modal';
+import { useModal } from '../../hooks/useModal';
 import Error from '../modal/error/error';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
 import OrderDetails from '../modal/order-details/order-details';
 
-// Представим withToggle в виде обычного функционального компонента.
+
 const withModal = (WrappedComponent) => (props) => {
-    const { modalType = 'error', modalTitle = '', modalItem = {}, ...exProps } = props;
-
-    const [showModal, setShowModal] = React.useState(false);
-
-    const openModal = React.useCallback(() => setShowModal(true), [])
-    const closeModal = React.useCallback(() => setShowModal(false), [])
+    const { modalType, ...exProps } = props;
+    const { modalState, openModal, closeModal } = useModal();
 
     return (
         <>
-            <WrappedComponent {...exProps} onClick={openModal} />
-            {showModal &&
-                <Modal type={modalType} title={modalTitle} item={modalItem} close={closeModal} >
+            <WrappedComponent {...exProps} modalOpen={openModal} />
+            {modalState.isOpen &&
+                <Modal title={modalState.title} closeFunc={closeModal} >
                     {
                         {
                             'error': <Error error='' />,
-                            'ingredient': Object.keys(modalItem).length === 0 ? <Error error='Не получено данных о ингридиенте...' /> : <IngredientDetails item={modalItem} />,
+                            'ingredient': Object.keys(modalState.item).length === 0 ? <Error error='Не получено данных о ингридиенте...' /> : <IngredientDetails item={modalState.item} />,
                             'order': <OrderDetails />,
-                        }[modalType]
+                        }[modalState.type]
                     }
                 </Modal>
             }

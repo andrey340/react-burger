@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
+import withModal from '../hocs/withModal';
 import styles from './app.module.css';
 
 export const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
+const WithModalConstructor = withModal(BurgerConstructor)
 
 function App() {
 
@@ -18,12 +20,12 @@ function App() {
   const fetchData = () => {
     fetch(API_URL)
       .then((res) => {
-        if (res.ok) {  // проверили
-          return res.json();  // распарисили ответ
+        if (res.ok) { 
+          return res.json(); 
         }
-        return Promise.reject(`Ошибка ${res.status}`);  // выкинули ошибку, если не `ok`
+        return Promise.reject(`Ошибка ${res.status}`); 
       })
-      .then((data) => {  // тут пришли готовые данные
+      .then((data) => { 
         setState({ ...state, data: data.data, isLoading: false });
       })
       .catch((err) => {
@@ -48,7 +50,7 @@ function App() {
             <h2>Произошла ошибка: {errorText}</h2>
             : <>
               <BurgerIngredients ingredients={data} />
-              <BurgerConstructor />
+              <WithModalConstructor />
             </>
         }
       </main>
