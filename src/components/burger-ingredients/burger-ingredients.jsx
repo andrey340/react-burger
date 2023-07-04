@@ -3,29 +3,37 @@ import PropTypes from 'prop-types';
 import { typeOfIngredient } from '../../utils/type';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import Ingredients from './ingredients/ingredients';
+import ingredientTypes from '../../utils/ingredient-types';
+import withModal from '../hocs/withModal';
 import styles from './burger-ingredients.module.css';
 
-function BurgerIngredients({ingredients}) {
-  const [current, setCurrent] = React.useState('buns')
+const WithModalIngredients = withModal(Ingredients)
+function BurgerIngredients({ ingredients, onClick }) {
+  const [current, setCurrentTypeIngredient] = React.useState('bun')
+
+  const renderTabs = (types) => {
+    return (
+      types.map((elem, index) => (
+        <Tab key={index} value={elem.type} active={current === `${elem.type}`} onClick={() => setCurrentTypeIngredient(elem.type)}>
+          {elem.desc}
+        </Tab>
+      ))
+    )
+  }
+
+  const ingredientsOfType = ingredients.filter(item => item.type === current);
+
   return (
     <section className={`mt-10 ${styles.section}`}>
       <p className="text text_type_main-large">
         Соберите бургер
       </p>
-        <div className={`mt-5 ${styles.tabs}`}>
-          <Tab value="buns" active={current === 'buns'} onClick={setCurrent}>
-            Булки
-          </Tab>
-          <Tab value="sauces" active={current === 'sauces'} onClick={setCurrent}>
-            Соусы
-          </Tab>
-          <Tab value="main" active={current === 'main'} onClick={setCurrent}>
-            Начинки
-          </Tab>
-        </div>
-        <Ingredients ingredients={ingredients} />
+      <div className={`mt-5 ${styles.tabs}`}>
+        {renderTabs(ingredientTypes)}
+      </div>
+      <WithModalIngredients ingredients={ingredientsOfType} />
     </section>
- 
+
   );
 }
 

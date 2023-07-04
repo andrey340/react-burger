@@ -1,47 +1,19 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { typeOfIngredient } from '../../../utils/type';
-import IngredientCard from "./ingredient-card/ingredient-card";
+import IngredientCard from "../ingredient-card/ingredient-card";
+import withModal from "../../hocs/withModal";
 import styles from './ingredients.module.css';
 
-function Ingredients({ingredients}) {
 
-    const buns = ingredients.filter(item => item.type === 'bun');
-    const mains = ingredients.filter(item => item.type === 'main');
-    const sauces = ingredients.filter(item => item.type === 'sauce');
-
-  
-
+function Ingredients({ ingredients, modalOpen }) {
     return (
         <div className={`${styles.content} ${styles.scrollbar}`}>
             <div className="mt-10">
-                <h2 className="mb-6 text text_type_main-medium">
-                    Булки
-                </h2>
                 <ul className={styles.ul}>
-                {buns.map((elem) => (
-                    <IngredientCard key={elem._id} item={elem} />
-                ))}
-                </ul>
-            </div>
-            <div className="mt-10">
-                <h2 className="mb-6 text text_type_main-medium">
-                    Соусы
-                </h2>
-                <ul className={styles.ul}>
-                {sauces.map((elem) => (
-                    <IngredientCard key={elem._id} item={elem} />
-                ))}
-                </ul>
-            </div>
-            <div className="mt-10">
-                <h2 className="mb-6 text text_type_main-medium">
-                    Начинки
-                </h2>
-                <ul className={styles.ul}>
-                {mains.map((elem) => (
-                    <IngredientCard key={elem._id} item={elem} />
-                ))}
+                    {ingredients.map((elem) => (
+                        <IngredientCard key={elem._id} item={elem} modalOpen={modalOpen} />
+                    ))}
                 </ul>
             </div>
         </div>
@@ -50,8 +22,8 @@ function Ingredients({ingredients}) {
 
 Ingredients.propTypes = {
     ingredients: PropTypes.arrayOf(
-      typeOfIngredient
+        typeOfIngredient
     )
-  }
+}
 
 export default Ingredients;

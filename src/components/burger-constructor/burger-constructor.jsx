@@ -1,14 +1,14 @@
-import {React} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ConstructorElement, Button, DragIcon, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
-import {tempData} from '../../utils/temp-data';
+import { tempDataForConstructor } from '../../utils/temp-data-for-constructor';
 
+function BurgerConstructor({ data = tempDataForConstructor, modalOpen }) {
 
-
-
-function BurgerConstructor({data = tempData}) {
-
+  const handleClick = (e) => {
+    modalOpen('order')
+  }
   const total = 610;
 
   return (
@@ -22,24 +22,22 @@ function BurgerConstructor({data = tempData}) {
           thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
           extraClass='mt-4 mb-4 ml-4 mr-2'
         />
-
         <div className={`${styles.content} ${styles.scrollbar}`}>
-          {data.map((elem, index) => ( 
- 
-              <div key={index} className={styles.dragable}>
-                <DragIcon type="primary" />         
-                <ConstructorElement
+          {data.map((elem, index) => (
+
+            <div key={index} className={styles.dragable}>
+              <DragIcon type="primary" />
+              <ConstructorElement
                 isLocked={false}
                 text={elem.text}
                 price={elem.price}
                 thumbnail={elem.img}
                 extraClass='mt-4 mb-4 ml-2 mr-2'
-                />
-              </div>
+              />
+            </div>
 
-            ))}
+          ))}
         </div>
-        
         <ConstructorElement
           type="bottom"
           isLocked={true}
@@ -49,12 +47,10 @@ function BurgerConstructor({data = tempData}) {
           extraClass='mt-4 mb-4 ml-4 mr-2'
         />
       </div>
-       
-
       <div className={`mt-10 ${styles.total}`}>
         <p className="text text_type_digits-medium mr-2">{total}</p>
-        <CurrencyIcon  type="primary" />
-        <Button htmlType="button" type="primary" size="large" extraClass='ml-10'>
+        <CurrencyIcon type="primary" />
+        <Button htmlType="button" type="primary" size="large" extraClass='ml-10' onClick={handleClick}>
           Оформить заказ
         </Button>
       </div>
@@ -63,13 +59,13 @@ function BurgerConstructor({data = tempData}) {
 }
 
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(
-      PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired
-      }).isRequired
-    )
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      image: PropTypes.string.isRequired
+    }).isRequired
+  )
 }
 
 
