@@ -3,10 +3,12 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import withModal from '../hocs/withModal';
+import { IngredientContext } from '../services/ingredient-context';
 import styles from './app.module.css';
 
 export const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
 const WithModalConstructor = withModal(BurgerConstructor)
+
 
 function App() {
 
@@ -20,12 +22,12 @@ function App() {
   const fetchData = () => {
     fetch(API_URL)
       .then((res) => {
-        if (res.ok) { 
-          return res.json(); 
+        if (res.ok) {
+          return res.json();
         }
-        return Promise.reject(`Ошибка ${res.status}`); 
+        return Promise.reject(`Ошибка ${res.status}`);
       })
-      .then((data) => { 
+      .then((data) => {
         setState({ ...state, data: data.data, isLoading: false });
       })
       .catch((err) => {
@@ -37,8 +39,11 @@ function App() {
     fetchData()
   }, [])
 
+ 
+
 
   const { data, isLoading, errorText } = state;
+  console.log(data)
   return (
     <>
       <AppHeader />
@@ -48,10 +53,11 @@ function App() {
           : errorText !== ''
             ?
             <h2>Произошла ошибка: {errorText}</h2>
-            : <>
-              <BurgerIngredients ingredients={data} />
-              <WithModalConstructor />
-            </>
+            :
+            <IngredientContext.Provider value={data}>
+              <BurgerIngredients/>
+              <WithModalConstructor/>
+            </IngredientContext.Provider>
         }
       </main>
     </>

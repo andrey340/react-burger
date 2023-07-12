@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import { ConstructorElement, Button, DragIcon, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
-import { tempDataForConstructor } from '../../utils/temp-data-for-constructor';
+import { IngredientContext } from '../services/ingredient-context';
 
-function BurgerConstructor({ data = tempDataForConstructor, modalOpen }) {
+function BurgerConstructor({ modalOpen }) {
 
   const handleClick = (e) => {
     modalOpen('order')
   }
+
   const total = 610;
+  const data = useContext(IngredientContext);
+  //const bun =  data.filter((el) => el.type === 'bun')
+  const bun =  data.find((el) => el.type === 'bun')
+  const otherIngredients = data.filter((el) => el.type !== 'bun')
+
+
+
 
   return (
     <section className={`mt-25 ${styles.section}`}>
@@ -17,21 +25,22 @@ function BurgerConstructor({ data = tempDataForConstructor, modalOpen }) {
         <ConstructorElement
           type="top"
           isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+          text= {`${bun.name}  (верх)`}
+          price={bun.price}
+          thumbnail={bun.image_large}
           extraClass='mt-4 mb-4 ml-4 mr-2'
         />
         <div className={`${styles.content} ${styles.scrollbar}`}>
-          {data.map((elem, index) => (
+          {otherIngredients.map((elem, index) => ( 
+          
 
             <div key={index} className={styles.dragable}>
               <DragIcon type="primary" />
               <ConstructorElement
                 isLocked={false}
-                text={elem.text}
+                text={elem.name}
                 price={elem.price}
-                thumbnail={elem.img}
+                thumbnail={elem.image_large}
                 extraClass='mt-4 mb-4 ml-2 mr-2'
               />
             </div>
@@ -41,9 +50,9 @@ function BurgerConstructor({ data = tempDataForConstructor, modalOpen }) {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
+          text= {`${bun.name}  (низ)`}
+          price={bun.price}
+          thumbnail={bun.image_large}
           extraClass='mt-4 mb-4 ml-4 mr-2'
         />
       </div>
