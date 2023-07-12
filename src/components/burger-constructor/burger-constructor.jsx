@@ -12,11 +12,9 @@ function BurgerConstructor({ modalOpen }) {
 
   const total = 610;
   const data = useContext(IngredientContext);
-  //const bun =  data.filter((el) => el.type === 'bun')
+
   const bun =  data.find((el) => el.type === 'bun')
   const otherIngredients = data.filter((el) => el.type !== 'bun')
-
-
 
 
   return (

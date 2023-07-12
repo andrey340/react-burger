@@ -14,7 +14,7 @@ function App() {
 
   const [state, setState] = useState({
     data: [],
-    isLoading: false,
+    isLoading: true,
     errorText: ''
   })
 
@@ -39,11 +39,9 @@ function App() {
     fetchData()
   }, [])
 
- 
-
 
   const { data, isLoading, errorText } = state;
-  console.log(data)
+
   return (
     <>
       <AppHeader />
@@ -55,8 +53,8 @@ function App() {
             <h2>Произошла ошибка: {errorText}</h2>
             :
             <IngredientContext.Provider value={data}>
-              <BurgerIngredients/>
-              <WithModalConstructor/>
+              <BurgerIngredients />
+              <WithModalConstructor />
             </IngredientContext.Provider>
         }
       </main>
