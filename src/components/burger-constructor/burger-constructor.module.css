@@ -13,8 +13,9 @@
     flex-shrink: 0; 
 }
 
-.constructor-element {
+.elem {
     max-height: 80px;
+
 }
 
 .dragable {

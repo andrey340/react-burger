@@ -1,23 +1,23 @@
 import { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { CLOSE_MODAL } from "../services/actions/ingredients";
 
 export const useModal = () => {
+    const dispatch = useDispatch();
     const [modalState, setModalState] = useState({
         isOpen: false,
-        type: 'order',
-        item: '',
-        title: ''
     });
-    const openModal = useCallback((type = 'order', item = {}, title = '') => {
+    const openModal = useCallback(() => {
         setModalState({
             isOpen: true,
-            type: type,
-            item: item,
-            title: title
         });
     }, []);
 
     const closeModal = useCallback(() => {
-        setModalState({ ...modalState, isOpen: false });
+        setModalState({ isOpen: false });
+        dispatch({
+            type: CLOSE_MODAL
+        })
     }, []);
 
     return {
