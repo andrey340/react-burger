@@ -18,7 +18,7 @@ export const useModal = () => {
         dispatch({
             type: CLOSE_MODAL
         })
-    }, []);
+    }, [dispatch]);
 
     return {
         modalState,

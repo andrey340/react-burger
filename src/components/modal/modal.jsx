@@ -19,7 +19,7 @@ function Modal(props) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     }
-  }, [])
+  }, [props])
 
   return createPortal((
     <>

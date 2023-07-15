@@ -13,9 +13,10 @@ const withModal = (WrappedComponent) => (props) => {
     const { modalState, openModal, closeModal } = useModal();
 
     const viewIngredient = useSelector(state => state.ingredients.viewIngredient)
-    const orderObj = useSelector(state => state.ingredients.orderObj)
+    const order = useSelector(state => state.ingredients.order)
+    const orderRequest = useSelector(state => state.ingredients.orderRequest)
 
-    const type = (Object.keys(viewIngredient).length !== 0) ? 'ingredient' : (Object.keys(orderObj).length !== 0) ? 'order' : 'error';
+    const type = (Object.keys(viewIngredient).length !== 0) ? 'ingredient' : (order.number !== 0 && !orderRequest) ? 'order' : 'error';
     const title = (type === 'ingredient') ? 'Детали ингредиента' : ''
 
 

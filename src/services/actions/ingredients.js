@@ -35,10 +35,45 @@ export function getIngredients() {
                     type: GET_INGREDIENTS_SUCCESS,
                     data: data.data
                 });
+
             })
             .catch((err) => {
                 dispatch({
                     type: GET_INGREDIENTS_FAILED,
+                    requestError: String(err)
+                });
+            })
+    }
+}
+
+export function getOrder(data) {
+    return function (dispatch) {
+        dispatch({
+            type: GET_ORDER_REQUEST
+        });
+        fetch(API_ORDER, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json;charset=utf-8"
+            }
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(`Ошибка ${res.status}`);
+            })
+            .then((data) => {
+                dispatch({
+                    type: GET_ORDER_SUCCESS,
+                    data: data.order.number
+                });
+
+            })
+            .catch((err) => {
+                dispatch({
+                    type: GET_ORDER_FAILED,
                     requestError: String(err)
                 });
             })

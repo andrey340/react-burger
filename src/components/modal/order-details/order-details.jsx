@@ -1,11 +1,13 @@
 import done from '../../../images/done.svg';
 import styles from './order-details.module.css';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 const OrderDetails = () => {
+    const order = useSelector(state => state.ingredients.order)
     return (
         <>
-            <span className="text text_type_digits-large mt-4 mb-8">034536</span>
+            <span className="text text_type_digits-large mt-4 mb-8">{order}</span>
             <span className='text text_type_main-medium'>идентификатор заказа</span>
-            <img className={`mt-15 mb-15 ${styles.img}`} src={done} />
+            <img className={`mt-15 mb-15 ${styles.img}`} src={done} alt="done" />
             <span className="text text_type_main-default">Ваш заказ начали готовить</span>
             <span className="text text_type_main-default text_color_inactive mt-2 mb-20">Дождитесь готовности на орбитальной станции</span>
         </>
