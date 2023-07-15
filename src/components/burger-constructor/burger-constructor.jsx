@@ -60,7 +60,7 @@ function BurgerConstructor({ modalOpen }) {
         />
         <div className={`${styles.content} ${styles.scrollbar}`}>
           {filling.map((elem, index) => (
-            <Filling elem={elem} key={index} />
+            <Filling elem={elem} key={index} index={index} />
           ))}
         </div>
         <ConstructorElement
