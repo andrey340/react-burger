@@ -1,0 +1,2 @@
+export const INGREDIENT_TO_VIEW = 'INGREDIENT_TO_VIEW';
+export const CLOSE_MODAL = 'CLOSE MODAL';

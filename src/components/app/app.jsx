@@ -15,15 +15,16 @@ const WithModalConstructor = withModal(BurgerConstructor)
 
 function App() {
 
-  const { ingredients, ingredientsRequest, ingredientsFailed, requestError } = useSelector(state => state.ingredients)
+  const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector((state) => state.ingredients)
 
   const dispatch = useDispatch();
   useEffect(
     () => {
-      if (!ingredients.length) dispatch(getIngredients());
+      if (!ingredients.length) dispatch(getIngredients());     
     },
     [dispatch, ingredients.length]
   );
+
 
   return (
     <>
@@ -33,7 +34,7 @@ function App() {
           ? <h2>Идет загрузка данных...</h2>
           : ingredientsFailed
             ?
-            <h2>Произошла ошибка: {requestError}</h2>
+            <h2>Произошла ошибка</h2>
             :
             <DndProvider backend={HTML5Backend}>
               <BurgerIngredients />

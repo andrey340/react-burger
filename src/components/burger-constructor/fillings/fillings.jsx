@@ -4,7 +4,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import styles from '../burger-constructor.module.css';
 import { useDrop, useDrag } from 'react-dnd/dist/hooks';
 import { useDispatch } from 'react-redux';
-import { DEL_FROM_CONSTRUCTOR, MOVE_IN_CONSTRUCTOR } from '../../../services/actions/ingredients';
+import { DEL_FROM_CONSTRUCTOR, MOVE_IN_CONSTRUCTOR } from '../../../services/actions/constructor';
 
 function Filling({ elem, index }) {
 
@@ -67,7 +67,7 @@ function Filling({ elem, index }) {
   drag(drop(ref));
 
   return (
-    <div ref={ref} key={index} className={styles.dragable} style={{ opacity }}>
+    <div ref={ref} index={index} className={styles.dragable} style={{ opacity }}>
       <DragIcon type="primary" />
       <ConstructorElement
         isLocked={false}

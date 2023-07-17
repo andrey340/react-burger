@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { CLOSE_MODAL } from "../services/actions/ingredients";
+import { CLOSE_MODAL } from "../services/actions/modal";
 
 export const useModal = () => {
     const dispatch = useDispatch();

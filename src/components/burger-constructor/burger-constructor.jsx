@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Filling from './fillings/fillings';
@@ -6,16 +6,15 @@ import styles from './burger-constructor.module.css';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDrop } from 'react-dnd/dist/hooks';
 import { useDispatch } from 'react-redux';
-import { ADD_TO_CONSTRUCTOR, GET_ORDER_REQUEST, getOrder } from '../../services/actions/ingredients';
+import { ADD_TO_CONSTRUCTOR } from '../../services/actions/constructor';
+import { getOrder } from '../../services/actions/order';
+import { v4 as uuid } from 'uuid';
 
 
 function BurgerConstructor({ modalOpen }) {
   const dispatch = useDispatch()
 
   const handleClick = (e) => {
-    dispatch({
-      type: GET_ORDER_REQUEST,
-    })
     const idsArr = filling.map((el) => el._id)
     idsArr.push(bun._id)
     idsArr.push(bun._id) //Булочки то две должны в заказ упасть...
@@ -23,10 +22,9 @@ function BurgerConstructor({ modalOpen }) {
     modalOpen()
   }
 
-  const bun = useSelector(state => state.ingredients.constructor.bun)
-  const filling = useSelector(state => state.ingredients.constructor.filling);
-
-  const totalCost = filling.reduce((acc, cur) => acc + cur.price, 0) + bun.price * 2;
+  const bun = useSelector(state => state.constructorOrder.bun)
+  const filling = useSelector(state => state.constructorOrder.filling);
+  const ingredients = useSelector(state => state.ingredients.ingredients);
 
   const toOrder = item => {
     dispatch({
@@ -35,10 +33,25 @@ function BurgerConstructor({ modalOpen }) {
     })
   }
 
+  useEffect(
+    () => {
+      if (Object.keys(bun).length === 0 ) {
+        const bunToAdd = ingredients.find((el) => el.type === 'bun')
+        toOrder(bunToAdd)
+      }  
+    },
+    []
+  );
+
+
+  const totalCost = (Object.keys(bun).length === 0 ) ? 0 : filling.reduce((acc, cur) => acc + cur.price, 0) + bun.price * 2;
+
+ 
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredients',
     drop(item) {
-      toOrder(item)
+      toOrder(item);
+      item.uuid = uuid()
     },
     collect: monitor => ({
       isHover: monitor.isOver()
@@ -60,7 +73,7 @@ function BurgerConstructor({ modalOpen }) {
         />
         <div className={`${styles.content} ${styles.scrollbar}`}>
           {filling.map((elem, index) => (
-            <Filling elem={elem} key={index} index={index} />
+            <Filling elem={elem} key={elem.uuid} index={index} />
           ))}
         </div>
         <ConstructorElement

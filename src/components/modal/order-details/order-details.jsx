@@ -2,7 +2,7 @@ import done from '../../../images/done.svg';
 import styles from './order-details.module.css';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 const OrderDetails = () => {
-    const order = useSelector(state => state.ingredients.order)
+    const order = useSelector(state => state.order.order)
     return (
         <>
             <span className="text text_type_digits-large mt-4 mb-8">{order}</span>
