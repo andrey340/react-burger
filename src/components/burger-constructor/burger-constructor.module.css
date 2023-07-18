@@ -13,8 +13,17 @@
     flex-shrink: 0; 
 }
 
-.constructor-element {
+.elem {
     max-height: 80px;
+    min-width: 536px;
+
+}
+.elem:hover {
+  cursor: pointer;
+}
+
+.onHover {
+  opacity: 0.5;
 }
 
 .dragable {

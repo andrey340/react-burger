@@ -5,23 +5,33 @@ import { useModal } from '../../hooks/useModal';
 import Error from '../modal/error/error';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
 import OrderDetails from '../modal/order-details/order-details';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 
 const withModal = (WrappedComponent) => (props) => {
     const { modalType, ...exProps } = props;
     const { modalState, openModal, closeModal } = useModal();
 
+    const viewIngredient = useSelector(state => state.modal.viewIngredient)
+    const order = useSelector(state => state.order.order)
+    const orderRequest = useSelector(state => state.order.orderRequest)
+    
+
+    const type = (Object.keys(viewIngredient).length !== 0) ? 'ingredient' : (order.number !== 0 && !orderRequest) ? 'order' : 'error';
+    const title = (type === 'ingredient') ? 'Детали ингредиента' : ''
+
+
     return (
         <>
             <WrappedComponent {...exProps} modalOpen={openModal} />
             {modalState.isOpen &&
-                <Modal title={modalState.title} closeFunc={closeModal} >
+                <Modal title={title} closeFunc={closeModal} >
                     {
                         {
                             'error': <Error error='' />,
-                            'ingredient': Object.keys(modalState.item).length === 0 ? <Error error='Не получено данных о ингридиенте...' /> : <IngredientDetails item={modalState.item} />,
+                            'ingredient': <IngredientDetails item={viewIngredient} />,
                             'order': <OrderDetails />,
-                        }[modalState.type]
+                        }[type]
                     }
                 </Modal>
             }
