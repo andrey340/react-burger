@@ -1,49 +1,54 @@
 import React, { useEffect } from 'react';
-import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
-import withModal from '../hocs/withModal';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIngredients } from '../../services/actions/ingredients';
-import { DndProvider } from 'react-dnd/dist/core';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import AppHeader from '../app-header/app-header';
+import { Constructor, Login, Register, ForgotPassword, ResetPassword, NotFoundPage, Profile, ProfileEdit, InWork } from '../../pages';
+import { ProtectedRouteElement } from '../protected-route-element/protected-route-element';
 import styles from './app.module.css';
+import { Ingredient } from '../../pages/ingredient/ingredient';
+import { getIngredients } from '../../services/actions/ingredients';
+import Loading from '../loading/loading';
 
-
-
-const WithModalConstructor = withModal(BurgerConstructor)
-
-function App() {
+export default function App() {
 
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector((state) => state.ingredients)
 
+
   const dispatch = useDispatch();
-  useEffect(
-    () => {
-      if (!ingredients.length) dispatch(getIngredients());     
-    },
+  useEffect(() => {
+    if (!ingredients.length) dispatch(getIngredients());
+  },
     [dispatch, ingredients.length]
   );
 
 
   return (
-    <>
+    <div className={styles.content}>
+
       <AppHeader />
-      <main className={styles.main}>
-        {ingredientsRequest
-          ? <h2>Идет загрузка данных...</h2>
-          : ingredientsFailed
-            ?
-            <h2>Произошла ошибка</h2>
-            :
-            <DndProvider backend={HTML5Backend}>
-              <BurgerIngredients />
-              <WithModalConstructor />
-            </DndProvider>
-        }
-      </main>
-    </>
+      {ingredientsRequest
+        ? <Loading />
+        : ingredientsFailed
+          ?
+          <h2>Произошла ошибка</h2>
+          :
+          <main className={styles.main}>
+            <Routes>
+              <Route path="/" element={<Constructor />} />
+              <Route path="/login" element={<ProtectedRouteElement element={<Login />} notAuth={true} />} />
+              <Route path="/register" element={<ProtectedRouteElement element={<Register />} notAuth={true} />} />
+              <Route path="/forgot-password" element={<ProtectedRouteElement element={<ForgotPassword />} notAuth={true} />} />
+              <Route path="/reset-password" element={<ProtectedRouteElement element={<ResetPassword />} notAuth={true} />} />
+              <Route path="/profile" element={<ProtectedRouteElement element={<Profile notAuth={false} />} />} >
+                <Route path='' element={<ProfileEdit />} />
+                <Route path='orders' element={<InWork />} />
+              </Route>
+              <Route path="/orders" element={<InWork />} />
+              <Route path="/*" element={<NotFoundPage />} />
+              <Route path='ingredients/:id' element={<Ingredient />} />
+            </Routes>
+          </main>
+      }
+    </div>
   );
 }
-
-export default App;

@@ -2,7 +2,9 @@ import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
 
 const IngredientDetails = ({ item }) => {
+
     return (
+
         <>
             <img className={`mt-15 mb-15 ml-10 mr-10 ${styles.img}`} src={item.image_large} alt={item.name} />
             <span className="text text_type_main-default">{item.name}</span>
@@ -26,6 +28,7 @@ const IngredientDetails = ({ item }) => {
                 </div>
             </div>
         </>
+        
     )
 }
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Filling from './fillings/fillings';
@@ -9,17 +9,25 @@ import { useDispatch } from 'react-redux';
 import { ADD_TO_CONSTRUCTOR } from '../../services/actions/constructor';
 import { getOrder } from '../../services/actions/order';
 import { v4 as uuid } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 
 function BurgerConstructor({ modalOpen }) {
+  const isAuth = useSelector(state => state.user.isUserAuth);
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const handleClick = (e) => {
-    const idsArr = filling.map((el) => el._id)
-    idsArr.push(bun._id)
-    idsArr.push(bun._id) //Булочки то две должны в заказ упасть...
-    if (idsArr.length !== 0) dispatch(getOrder({ ingredients: idsArr }));
-    modalOpen()
+    if (isAuth) {
+      const idsArr = filling.map((el) => el._id)
+      idsArr.push(bun._id)
+      idsArr.push(bun._id) //Булочки то две должны в заказ упасть...
+      if (idsArr.length !== 0) dispatch(getOrder({ ingredients: idsArr }));
+      modalOpen()
+    } else {
+      navigate('/login')
+    }
+
   }
 
   const bun = useSelector(state => state.constructorOrder.bun)
@@ -35,18 +43,18 @@ function BurgerConstructor({ modalOpen }) {
 
   useEffect(
     () => {
-      if (Object.keys(bun).length === 0 ) {
+      if (Object.keys(bun).length === 0) {
         const bunToAdd = ingredients.find((el) => el.type === 'bun')
         toOrder(bunToAdd)
-      }  
+      }
     },
     []
   );
 
 
-  const totalCost = (Object.keys(bun).length === 0 ) ? 0 : filling.reduce((acc, cur) => acc + cur.price, 0) + bun.price * 2;
+  const totalCost = (Object.keys(bun).length === 0) ? 0 : filling.reduce((acc, cur) => acc + cur.price, 0) + bun.price * 2;
 
- 
+
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredients',
     drop(item) {
