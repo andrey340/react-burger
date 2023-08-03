@@ -182,13 +182,13 @@ export function userApi(type, data = {}, callbackFunction = () => { }) {
                             type: failedAction,
                             data: String(data.message)
                         });
-                        if(data.message === 'jwt expired') {
+                        if (data.message === 'jwt expired') {
                             dispatch(refreshToken(userApi(type, data, callbackFunction())))
                         }
                     }
                 })
                 .catch((err) => {
-                    if(err === 'jwt expired') {
+                    if (err === 'jwt expired') {
                         dispatch(refreshToken(userApi(type, data, callbackFunction())))
                     }
                     console.error(err);
@@ -205,7 +205,7 @@ const refreshToken = (afterRefresh) => (type, dataAfter, callbackFunction) => {
         fetch(API_URL + 'auth/token', {
             method: 'POST',
             body: JSON.stringify({
-                'token' : localStorage.getItem('refreshToken')
+                'token': localStorage.getItem('refreshToken')
             }),
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -245,5 +245,7 @@ const refreshToken = (afterRefresh) => (type, dataAfter, callbackFunction) => {
                 console.error(err);
             })
     }
+
+
 }
 

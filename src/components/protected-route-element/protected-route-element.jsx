@@ -9,8 +9,8 @@ import { getUser } from '../../services/actions/user';
 
 export const ProtectedRouteElement = ({ element, notAuth = false }) => {
 
-    const { isUserAuth } = useSelector((state) => state.user);
-    const { isLoading } = useSelector((state) => state.user);
+    const isUserAuth = useSelector((state) => state.user.isUserAuth);
+    const isLoading = useSelector((state) => state.user.isLoading);
 
     const cookie = getCookie('token');
     const dispatch = useDispatch();
@@ -20,12 +20,13 @@ export const ProtectedRouteElement = ({ element, notAuth = false }) => {
 
 
     if (isUserAuth && notAuth && !isLoading) {
-        return <Navigate to="/" replace />
+        return null
     }
 
     if (!isUserAuth && !notAuth && !isLoading) {
         return <Navigate to="/login" replace />
     }
+    
 
     return element;
 } 
