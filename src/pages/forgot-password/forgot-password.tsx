@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/selector-and-dispatch';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { userApi } from '../../services/actions/user';
 import styles from './forgot-password.module.css';
 
 
-export function ForgotPassword() {
+export const ForgotPassword: FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
 
-    const forgotError = useSelector(state => state.user.requestError)
+    const forgotError = useAppSelector(state => state.user.requestError)
 
-    const forgotPassFormSend = async (e) => {
+    const forgotPassFormSend = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         dispatch(
@@ -25,7 +26,7 @@ export function ForgotPassword() {
                     'email': email
                 },
                 () => navigate('/reset-password')
-            )
+            )!
         )
     }
 
@@ -39,8 +40,6 @@ export function ForgotPassword() {
                     placeholder="Укажите e-mail"
                     extraClass="mb-6"
                     onChange={(e) => setEmail(e.target.value)}
-                    error={forgotError !== ''}
-                    errorText={forgotError}
                 />
                 <Button htmlType='submit' type='primary' size='medium' extraClass='mb-20'>
                     Восстановить

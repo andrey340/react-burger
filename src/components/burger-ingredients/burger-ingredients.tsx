@@ -1,30 +1,30 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { typeOfIngredient } from '../../utils/type';
+import React, { useMemo, FC } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientTypes from '../../utils/ingredient-types';
 import IngredientCard from './ingredient-card/ingredient-card';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useAppSelector } from '../../hooks/selector-and-dispatch';
 import { InView } from 'react-intersection-observer';
 import withModal from '../hocs/withModal';
-
+import { Iingredient } from '../../types/ingredient';
+import { Itypes } from '../../types/ingredient-types';
 import styles from './burger-ingredients.module.css';
 
 const WithModalIngredientCard = withModal(IngredientCard)
-function BurgerIngredients() {
 
-  const ingredients = useSelector(store => store.ingredients.ingredients)
-  const buns = useMemo(() => ingredients.filter((item) => item.type === 'bun'), [ingredients]);
-  const sauces = useMemo(() => ingredients.filter((item) => item.type === 'sauce'), [ingredients]);
-  const mains = useMemo(() => ingredients.filter((item) => item.type === 'main'), [ingredients]);
+export const BurgerIngredients: FC = () => {
+
+  const ingredients = useAppSelector(store => store.ingredients.ingredients)
+  const buns = useMemo(() => ingredients.filter((item: { type: string; }) => item.type === 'bun'), [ingredients]);
+  const sauces = useMemo(() => ingredients.filter((item: { type: string; }) => item.type === 'sauce'), [ingredients]);
+  const mains = useMemo(() => ingredients.filter((item: { type: string; }) => item.type === 'main'), [ingredients]);
 
 
   const [current, setCurrentTypeIngredient] = React.useState('bun')
 
-  const renderTabs = (types) => {
+  const renderTabs = (types: Itypes[]) => {
     return (
-      types.map((elem, index) => (
-        <Tab key={index} value={elem.type} active={current === `${elem.type}`}>
+      types.map((elem: Itypes, index: number) => (
+        <Tab key={index} value={elem.type} active={current === `${elem.type}`} onClick={() => {}}>
           {elem.desc}
         </Tab>
       ))
@@ -47,7 +47,7 @@ function BurgerIngredients() {
           <div className="mt-10">
             <h2 className='text text_type_main-medium mb-4'>Булки</h2>
             <ul className={styles.ul}>
-              {buns.map((elem) => (
+              {buns.map((elem: Iingredient) => (
                 <WithModalIngredientCard key={elem._id} item={elem} />
               ))}
             </ul>
@@ -57,7 +57,7 @@ function BurgerIngredients() {
           <div className="mt-10">
             <h2 className='text text_type_main-medium mb-4'>Начинки</h2>
             <ul className={styles.ul}>
-              {mains.map((elem) => (
+              {mains.map((elem: Iingredient) => (
                 <WithModalIngredientCard key={elem._id} item={elem} />
               ))}
             </ul>
@@ -67,7 +67,7 @@ function BurgerIngredients() {
           <div className="mt-10">
             <h2 className='text text_type_main-medium mb-4'>Соусы</h2>
             <ul className={styles.ul}>
-              {sauces.map((elem) => (
+              {sauces.map((elem: Iingredient) => (
                 <WithModalIngredientCard key={elem._id} item={elem} />
               ))}
             </ul>
@@ -80,10 +80,5 @@ function BurgerIngredients() {
   );
 }
 
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(
-    typeOfIngredient
-  )
-}
 
 export default BurgerIngredients;

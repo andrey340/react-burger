@@ -1,16 +1,21 @@
-import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useRef } from 'react';
+import { Iingredient } from '../../../types/ingredient';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../burger-constructor.module.css';
 import { useDrop, useDrag } from 'react-dnd/dist/hooks';
 import { useDispatch } from 'react-redux';
 import { DEL_FROM_CONSTRUCTOR, MOVE_IN_CONSTRUCTOR } from '../../../services/actions/constructor';
 
-function Filling({ elem, index }) {
+interface IFilling  {
+  index: number;
+  elem: Iingredient;
+}
+
+export const Filling :FC<IFilling> = ({ elem, index }) => {
 
   const dispatch = useDispatch()
 
-  const deleteElem = (index, id) => {
+  const deleteElem = (index: number, id: string) => {
     dispatch({
       type: DEL_FROM_CONSTRUCTOR,
       index: index,
@@ -18,8 +23,8 @@ function Filling({ elem, index }) {
     })
   }
 
-  const ref = useRef(null);
-  const [, drop] = useDrop({
+  const ref = useRef<HTMLDivElement>(null);
+  const [, drop] = useDrop<IFilling, unknown, unknown >({
     accept: ["SORT_INGREDIENT"],
     collect(monitor) {
       return {
@@ -34,9 +39,9 @@ function Filling({ elem, index }) {
       }
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+        (hoverBoundingRect!.bottom - hoverBoundingRect!.top) / 2;
       const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = clientOffset!.y - hoverBoundingRect!.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
       }
@@ -67,7 +72,7 @@ function Filling({ elem, index }) {
   drag(drop(ref));
 
   return (
-    <div ref={ref} index={index} className={styles.dragable} style={{ opacity }}>
+    <div ref={ref} data-index={index} className={styles.dragable} style={{ opacity }}>
       <DragIcon type="primary" />
       <ConstructorElement
         isLocked={false}
@@ -81,24 +86,6 @@ function Filling({ elem, index }) {
   )
 }
 
-Filling.propTypes = {
-  elem: PropTypes.shape(
-    {
-      _id: PropTypes.string,
-      name: PropTypes.string,
-      type: PropTypes.string,
-      proteins: PropTypes.number,
-      fat: PropTypes.number,
-      carbohydrates: PropTypes.number,
-      calories: PropTypes.number,
-      price: PropTypes.number,
-      image: PropTypes.string,
-      image_mobile: PropTypes.string,
-      image_large: PropTypes.string,
-      __v: PropTypes.number,
-    }
-  ),
-  index: PropTypes.number
-}
+
 
 export default Filling;

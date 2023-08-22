@@ -1,10 +1,10 @@
-import React from 'react';
+import { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './NotFoundPage.module.css';
 import image404 from '../../images/404.png'
 
 
-export function NotFoundPage() {
+export const NotFoundPage: FC = () => {
     const navigate = useNavigate();
 
 

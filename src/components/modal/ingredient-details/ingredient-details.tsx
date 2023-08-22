@@ -1,7 +1,8 @@
 import styles from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
+import { FC } from 'react';
+import { Iingredient } from '../../../types/ingredient';
 
-const IngredientDetails = ({ item }) => {
+const IngredientDetails: FC<{item: Iingredient}> = ({ item }) => {
 
     return (
 
@@ -32,15 +33,6 @@ const IngredientDetails = ({ item }) => {
     )
 }
 
-Error.propTypes = {
-    item: PropTypes.shape({
-        image_large: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        calories: PropTypes.number.isRequired,
-        proteins: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-    }).isRequired
-}
+
 
 export default IngredientDetails
