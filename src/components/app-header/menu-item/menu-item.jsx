@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styles from './menu-item.module.css';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function MenuItem(props) {
   return (
-    <Button htmlType="button" size="small" className={styles.button}>
+    <Link to={props.to} className={`mt-4 mb-4 pl-5 pr-5 ${styles.link}`}>
       <li onClick={props.onClick} className={`p-1 ${styles.li} ${props.active && styles.active}`} >
         {props.children}
-        <div className='text text_type_main-default p-2'>
+        <div className='text text_type_main-default ml-2 mr-2'>
           {props.text}
         </div>
       </li>
-    </Button>
+    </Link>
   );
 }
 

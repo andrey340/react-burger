@@ -1,0 +1,16 @@
+.content {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    text-align: center;
+}
+
+.link {
+    cursor: pointer;
+    color: #4C4CFF;
+    text-decoration: none;
+}

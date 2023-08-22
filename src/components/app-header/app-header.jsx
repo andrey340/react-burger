@@ -8,22 +8,24 @@ function AppHeader() {
 
   return (
     <header className={styles.header}>
-      <nav className={`pt-4 pb-4 ${styles.nav}`}>
-        <ul className={`ml-5 mr-5 ${styles.m - 0}`}>
-          <MenuItem text='Конструтор' active={currentPage === `constructor`} current onClick={() => setPage('constructor')} >
-            <BurgerIcon type="primary" />
-          </MenuItem>
-          <MenuItem text='Лента заказов' active={currentPage === `orders`} onClick={() => setPage('orders')}>
-            <ListIcon type="secondary" />
-          </MenuItem>
-        </ul>
-        <Logo />
-        <ul className={`ml-5 mr-5 ${styles.m - 0}`}>
-          <MenuItem text='Личный кабинет' active={currentPage === `cabinet`} onClick={() => setPage('cabinet')}>
-            <ProfileIcon type="secondary" />
-          </MenuItem>
-        </ul>
+
+      <nav className={styles.nav}>
+        <MenuItem to='/' text='Конструтор' active={currentPage === `constructor`} current onClick={() => setPage('constructor')} >
+          <BurgerIcon type={currentPage === `constructor` ? `primary` : `secondary`} />
+        </MenuItem>
+        <MenuItem to='/orders' text='Лента заказов' active={currentPage === `orders`} current onClick={() => setPage('orders')} >
+          <ListIcon type={currentPage === `orders` ? `primary` : `secondary`} />
+        </MenuItem>
       </nav>
+
+      <Logo />
+
+      <nav className={styles.nav}>
+        <MenuItem to='/profile' text='Личный кабинет' active={currentPage === `profile`} current onClick={() => setPage('profile')} >
+          <ProfileIcon type={currentPage === `profile` ? `primary` : `secondary`} />
+        </MenuItem>
+      </nav>
+
     </header>
   );
 }

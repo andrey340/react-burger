@@ -1,3 +1,7 @@
+.link {
+    text-decoration: none;
+}
+
 .li {
    list-style: none; 
    display: flex;
@@ -5,9 +9,11 @@
     color: #8585AD;
     align-items: center;
 }
+
 .active {
     color: #F2F2F3;
 }
+
 .button {
     background-color: transparent;
     border: 0 transparent;

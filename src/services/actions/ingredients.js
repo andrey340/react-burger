@@ -26,7 +26,7 @@ export function getIngredients() {
                 dispatch({
                     type: GET_INGREDIENTS_FAILED,
                 });
-                console.log(String(err))
+                console.error(String(err))
             })
     }
 }
