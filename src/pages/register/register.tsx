@@ -1,6 +1,6 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { FormEncType, useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { userApi } from '../../services/actions/user';
@@ -18,7 +18,7 @@ export const Register: FC = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
 
-    const regFormSend = async (e: { preventDefault: () => void; }) => {
+    const regFormSend = async (e: FormEvent) => {
         e.preventDefault();
 
         dispatch(

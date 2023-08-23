@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect, FC, SyntheticEvent  } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { userApi } from '../../../services/actions/user';
@@ -62,7 +62,7 @@ export const Edit: FC = () => {
         setPassValue('');
     }
 
-    const saveChanges = async (e: { preventDefault: () => void; }) => {
+    const saveChanges = async (e: SyntheticEvent ) => {
         e.preventDefault();
     
         dispatch(

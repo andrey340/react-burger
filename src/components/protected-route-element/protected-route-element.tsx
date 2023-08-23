@@ -1,5 +1,5 @@
 import React, { FC, ReactElement }  from 'react';
-import PropTypes from 'prop-types';
+
 import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCookie } from '../../services/utils';

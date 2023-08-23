@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -17,7 +17,7 @@ export const Login: FC = () => {
   const loginError = useSelector((state: any) => state.user.requestError)
 
 
-  const loginFormSend = async (e: { preventDefault: () => void; }) => {
+  const loginFormSend  = async (e: FormEvent) => {
     e.preventDefault();
     
     dispatch(

@@ -15,7 +15,7 @@ interface IModal {
 export const Modal: FC<IModal> = ({ title, closeFunc, children }) => {
 
   React.useEffect(() => {
-    function handleKeyDown(e: { key: string; }) {
+    function handleKeyDown(e: KeyboardEvent ) {
       if (e.key === 'Escape') {
         closeFunc();
       }

@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Modal from '../modal/modal';
 import { useModal } from '../../hooks/useModal';
 import Error from '../modal/error/error';

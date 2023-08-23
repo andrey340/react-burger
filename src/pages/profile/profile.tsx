@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { userApi } from '../../services/actions/user';
@@ -10,7 +10,7 @@ export const Profile: FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const logOut = async (e: { preventDefault: () => void; }) => {
+    const logOut = async (e: FormEvent) => {
         e.preventDefault();
     
         dispatch(

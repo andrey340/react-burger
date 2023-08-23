@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +16,7 @@ export const ForgotPassword: FC = () => {
 
     const forgotError = useSelector((state: any) => state.user.requestError)
 
-    const forgotPassFormSend = async (e: { preventDefault: () => void; }) => {
+    const forgotPassFormSend = async (e: FormEvent) => {
         e.preventDefault();
 
         dispatch(
