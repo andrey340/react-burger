@@ -1,7 +1,7 @@
 import React, { useState, FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { useAppDispatch, useAppSelector } from '../../hooks/selector-and-dispatch';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { userApi } from '../../services/actions/user';
 import styles from './forgot-password.module.css';
@@ -9,17 +9,18 @@ import styles from './forgot-password.module.css';
 
 export const ForgotPassword: FC = () => {
 
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
 
-    const forgotError = useAppSelector(state => state.user.requestError)
+    const forgotError = useSelector((state: any) => state.user.requestError)
 
     const forgotPassFormSend = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         dispatch(
+            //@ts-ignore
             userApi(
                 'forgot',
                 {

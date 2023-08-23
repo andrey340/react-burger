@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { userApi } from '../../../services/actions/user';
 import styles from './edit.module.css';
 
 
-export function Edit() {
+export const Edit: FC = () => {
 
     const dispatch = useDispatch();
 
-    const user = useSelector((state) => state.user.user)
+    const user = useSelector((state: any) => state.user.user)
 
     const [isActiveName, setActiveName] = useState(false);
     const [isActiveEmail, setActiveEmail] = useState(false);
@@ -27,17 +27,19 @@ export function Edit() {
     );
 
 
-    const nameInput = React.createRef();
-    const emailInput = React.createRef();
+    const nameInput = React.createRef<HTMLInputElement>();
+    const emailInput = React.createRef<HTMLInputElement>();
 
-    const editInput = name => {
+    const editInput = (name: string) => {
         let curEl = '';
         switch (name) {
             case 'name':
+                //@ts-ignore
                 curEl = nameInput.current
                 setActiveName(true);
                 break;
             case 'email':
+                //@ts-ignore
                 curEl = emailInput.current
                 setActiveEmail(true);
                 break;
@@ -45,7 +47,7 @@ export function Edit() {
                 setActivePass(true);
                 break;
         }
-
+//@ts-ignore
         if( curEl !== '' ) setTimeout(() => curEl.focus(), 0)
         
     }
@@ -60,10 +62,11 @@ export function Edit() {
         setPassValue('');
     }
 
-    const saveChanges = async (e) => {
+    const saveChanges = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
     
         dispatch(
+            //@ts-ignore
           userApi(
             'edit',
             {
@@ -114,6 +117,7 @@ export function Edit() {
                     value={passValue} 
                     disabled={!isActivePass} 
                     onChange={e => setPassValue(e.target.value)} 
+                    //@ts-ignore
                     onIconClick={() => editInput('password')} 
                     name="password" placeholder="Пароль" 
                     icon="EditIcon" 

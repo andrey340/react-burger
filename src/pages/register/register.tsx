@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
@@ -7,21 +7,22 @@ import { userApi } from '../../services/actions/user';
 import styles from './register.module.css';
 
 
-export function Register() {
+export const Register: FC = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const regError = useSelector(state => state.user.requestError)
+    const regError = useSelector((state: any) => state.user.requestError)
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
 
-    const regFormSend = async (e) => {
+    const regFormSend = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         dispatch(
+             //@ts-ignore
             userApi(
                 'register',
                 {

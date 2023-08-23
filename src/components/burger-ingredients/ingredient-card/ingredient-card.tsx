@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './ingredient-card.module.css';
 import { Iingredient } from "../../../types/ingredient";
-import { useAppDispatch, useAppSelector } from "../../../hooks/selector-and-dispatch";
+import { useDispatch, useSelector } from 'react-redux';
 import { INGREDIENT_TO_VIEW } from "../../../services/actions/modal";
 import { useDrag } from "react-dnd";
 
@@ -13,10 +13,10 @@ interface ICard {
 
 export const IngredientCard: FC<ICard> = ({ item, modalOpen }) => {
 
-    const bun = useAppSelector(state => state.constructorOrder.bun)
-    const fillings = useAppSelector(state => state.constructorOrder.filling)
+    const bun = useSelector((state: any) => state.constructorOrder.bun)
+    const fillings = useSelector((state: any) => state.constructorOrder.filling)
 
-    const dispatcher = useAppDispatch();
+    const dispatcher = useDispatch();
     const handleClick = () => {
         dispatcher({
             type: INGREDIENT_TO_VIEW,

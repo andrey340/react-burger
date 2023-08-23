@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Filling from './fillings/fillings';
 import styles from './burger-constructor.module.css';
-import { useAppSelector, useAppDispatch } from '../../hooks/selector-and-dispatch';
+import { useDispatch, useSelector } from 'react-redux';
 import { Iingredient } from '../../types/ingredient';
 import { useDrop } from 'react-dnd/dist/hooks';
 import { ADD_TO_CONSTRUCTOR } from '../../services/actions/constructor';
@@ -16,8 +16,9 @@ interface IConstructor {
 
 
 export const BurgerConstructor :FC<IConstructor> = ({ modalOpen }) => {
-  const isAuth = useAppSelector(state => state.user.isUserAuth);
-  const dispatch = useAppDispatch()
+  const isAuth = useSelector((state: any) => state.user.isUserAuth);
+  
+  const dispatch = useDispatch()
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -25,6 +26,7 @@ export const BurgerConstructor :FC<IConstructor> = ({ modalOpen }) => {
       const idsArr = filling.map((el: Iingredient) => el._id)
       idsArr.push(bun._id)
       idsArr.push(bun._id) //Булочки то две должны в заказ упасть...
+      //@ts-ignore
       if (idsArr.length !== 0) dispatch(getOrder({ ingredients: idsArr }));
       modalOpen()
     } else {
@@ -33,9 +35,9 @@ export const BurgerConstructor :FC<IConstructor> = ({ modalOpen }) => {
 
   }
 
-  const bun = useAppSelector(state => state.constructorOrder.bun)
-  const filling = useAppSelector(state => state.constructorOrder.filling);
-  const ingredients = useAppSelector(state => state.ingredients.ingredients);
+  const bun = useSelector((state: any) => state.constructorOrder.bun)
+  const filling = useSelector((state: any) => state.constructorOrder.filling);
+  const ingredients = useSelector((state: any) => state.ingredients.ingredients);
 
  
   const toOrder = (item: Iingredient): void => {

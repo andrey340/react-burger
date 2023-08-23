@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-export function InWork() {
+export const InWork: FC = () => {
     return (
         <h2>Данный раздел в разработке</h2>
     );

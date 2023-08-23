@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import done from '../../../images/done.svg';
 import styles from './order-details.module.css';
-import { useAppSelector } from '../../../hooks/selector-and-dispatch';
+import { useSelector } from 'react-redux';
 
 const OrderDetails: FC = () => {
-    const order = useAppSelector(state => state.order.order)
+    const order = useSelector((state: any) => state.order.order)
     return (
         <>
             <span className="text text_type_digits-large mt-4 mb-8">{order}</span>

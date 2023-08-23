@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -6,7 +6,7 @@ import { userApi } from '../../services/actions/user';
 import styles from './login.module.css';
 
 
-export function Login() {
+export const Login: FC = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,13 +14,14 @@ export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const loginError = useSelector(state => state.user.requestError)
+  const loginError = useSelector((state: any) => state.user.requestError)
 
 
-  const loginFormSend = async (e) => {
+  const loginFormSend = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-
+    
     dispatch(
+      //@ts-ignore
       userApi(
         'login',
         {
@@ -45,8 +46,6 @@ export function Login() {
           placeholder="E-mail"
           extraClass="mb-6"
           onChange={(e) => setEmail(e.target.value)}
-          error={loginError !== ''}
-          errorText={loginError}
         />
         <PasswordInput
           value={password}

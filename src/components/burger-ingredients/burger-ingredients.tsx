@@ -2,7 +2,7 @@ import React, { useMemo, FC } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientTypes from '../../utils/ingredient-types';
 import IngredientCard from './ingredient-card/ingredient-card';
-import { useAppSelector } from '../../hooks/selector-and-dispatch';
+import { useDispatch, useSelector } from 'react-redux';
 import { InView } from 'react-intersection-observer';
 import withModal from '../hocs/withModal';
 import { Iingredient } from '../../types/ingredient';
@@ -13,7 +13,7 @@ const WithModalIngredientCard = withModal(IngredientCard)
 
 export const BurgerIngredients: FC = () => {
 
-  const ingredients = useAppSelector(store => store.ingredients.ingredients)
+  const ingredients = useSelector((store: any) => store.ingredients.ingredients)
   const buns = useMemo(() => ingredients.filter((item: { type: string; }) => item.type === 'bun'), [ingredients]);
   const sauces = useMemo(() => ingredients.filter((item: { type: string; }) => item.type === 'sauce'), [ingredients]);
   const mains = useMemo(() => ingredients.filter((item: { type: string; }) => item.type === 'main'), [ingredients]);

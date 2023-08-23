@@ -9,15 +9,15 @@ import { rootReducer } from './services/reducers';
 import { BrowserRouter } from 'react-router-dom';
 
 
-// const composeEnhancers =
-//   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-//     : compose;
+const composeEnhancers =
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose;
 
 
-// const enhancer = composeEnhancers(applyMiddleware(thunk));;
+const enhancer = composeEnhancers(applyMiddleware(thunk));;
 
-// const store = createStore(rootReducer, enhancer);
+const store = createStore(rootReducer, enhancer);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root')
@@ -25,7 +25,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Provider store={rootReducer}>
+    <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
