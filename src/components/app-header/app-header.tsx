@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import MenuItem from './menu-item/menu-item';
 import styles from './app-header.module.css';
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -20,7 +20,10 @@ export const AppHeader: FC = () => {
         </MenuItem>
       </nav>
 
-      <Logo />
+      <MenuItem to='/' text='' active={currentPage === `constructor`} onClick={() => setPage('constructor')} >
+        <Logo />
+      </MenuItem>
+
 
       <nav className={styles.nav}>
         <MenuItem to='/profile' text='Личный кабинет' active={currentPage === `profile`} onClick={() => setPage('profile')} >

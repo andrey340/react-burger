@@ -43,6 +43,7 @@ export function ResetPassword() {
                     placeholder="Введите новый пароль"
                     extraClass="mb-6"
                     onChange={(e) => setPassword(e.target.value)}
+                    aria-errormessage = {forgotError}
                 />
                 <Input
                     value={code}

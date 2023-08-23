@@ -41,6 +41,7 @@ export const ForgotPassword: FC = () => {
                     placeholder="Укажите e-mail"
                     extraClass="mb-6"
                     onChange={(e) => setEmail(e.target.value)}
+                    aria-errormessage = {forgotError}
                 />
                 <Button htmlType='submit' type='primary' size='medium' extraClass='mb-20'>
                     Восстановить

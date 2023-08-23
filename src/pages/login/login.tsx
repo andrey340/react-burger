@@ -53,6 +53,7 @@ export const Login: FC = () => {
           placeholder="Пароль"
           extraClass="mb-6"
           onChange={(e) => setPassword(e.target.value)}
+          aria-errormessage = {loginError}
         />
         <Button htmlType='submit' type='primary' size='medium' extraClass='mb-20'>
           Войти
