@@ -1,6 +1,6 @@
 import React, { FC, ReactElement }  from 'react';
 
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCookie } from '../../services/utils';
 import { getUser } from '../../services/actions/user';
@@ -17,18 +17,21 @@ export const ProtectedRouteElement: FC<IProtected> = ({ element, notAuth = false
 
     const cookie = getCookie('token');
     const dispatch = useDispatch();
+
+    const location = useLocation();
+    const from = location.state?.from || '/';
+
     if (!isUserAuth && cookie && cookie !== '' && !isLoading) {
         //@ts-ignore
         dispatch(getUser('get'));
     } 
 
-
     if (isUserAuth && notAuth && !isLoading) {
-        return null
+        return <Navigate to={ from } />;
     }
 
     if (!isUserAuth && !notAuth && !isLoading) {
-        return <Navigate to="/login" replace />
+        return <Navigate to="/login" state={{ from: location}}/>;
     }
     
 

@@ -1,5 +1,6 @@
 import { API_URL } from "../config";
 import { setCookie, deleteCookie, getCookie } from "../utils";
+import { checkResponse } from "../../utils/tools";
 
 export const GET_AUTH_REQUEST = 'GET_AUTH_REQUEST';
 export const GET_AUTH_SUCCESS = 'GET_AUTH_SUCCESS';
@@ -46,12 +47,7 @@ export function getUser() {
                 "authorization": 'Bearer ' + getCookie('token'),
             }
         })
-            .then((res) => {
-                if (res.ok || res.status === 401 || res.status === 403) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка ${res.status}`);
-            })
+            .then(checkResponse)
             .then((data) => {
                 if (data.success) {
                     dispatch({

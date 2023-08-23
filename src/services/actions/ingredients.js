@@ -1,4 +1,5 @@
 import { API_URL } from "../config";
+import { checkResponse } from "../../utils/tools";
 
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
@@ -10,12 +11,7 @@ export function getIngredients() {
             type: GET_INGREDIENTS_REQUEST
         });
         fetch(API_URL + 'ingredients')
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка ${res.status}`);
-            })
+            .then(checkResponse)
             .then((data) => {
                 dispatch({
                     type: GET_INGREDIENTS_SUCCESS,

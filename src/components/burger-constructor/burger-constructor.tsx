@@ -64,8 +64,7 @@ export const BurgerConstructor :FC<IConstructor> = ({ modalOpen }) => {
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredients',
     drop(item: Iingredient) {
-      toOrder(item);
-      item.uuid = uuid()
+      toOrder({ ...item, uuid: uuid() });
     },
     collect: monitor => ({
       isHover: monitor.isOver()

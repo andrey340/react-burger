@@ -1,5 +1,6 @@
 import { API_URL } from "../config";
 import { getCookie } from "../utils";
+import { checkResponse } from "../../utils/tools";
 export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
 export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
@@ -17,12 +18,7 @@ export function getOrder(data) {
                 "authorization": 'Bearer ' + getCookie('token'),
             }
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка ${res.status}`);
-            })
+            .then(checkResponse)
             .then((data) => {
                 dispatch({
                     type: GET_ORDER_SUCCESS,
