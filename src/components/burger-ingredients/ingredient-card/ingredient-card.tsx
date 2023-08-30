@@ -1,20 +1,23 @@
-import React from "react";
-import PropTypes from 'prop-types';
-import { typeOfIngredient } from '../../../utils/type';
+import React, {FC} from "react";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './ingredient-card.module.css';
-import { useDispatch, useSelector } from "react-redux";
+import { Iingredient } from "../../../types/ingredient";
+import { useDispatch, useSelector } from 'react-redux';
 import { INGREDIENT_TO_VIEW } from "../../../services/actions/modal";
 import { useDrag } from "react-dnd";
 
+interface ICard {
+    item: Iingredient;
+    modalOpen: () => void;
+}
 
-function IngredientCard({ item, modalOpen }) {
+export const IngredientCard: FC<ICard> = ({ item, modalOpen }) => {
 
-    const bun = useSelector(state => state.constructorOrder.bun)
-    const fillings = useSelector(state => state.constructorOrder.filling)
+    const bun = useSelector((state: any) => state.constructorOrder.bun)
+    const fillings = useSelector((state: any) => state.constructorOrder.filling)
 
     const dispatcher = useDispatch();
-    const handleClick = (e) => {
+    const handleClick = () => {
         dispatcher({
             type: INGREDIENT_TO_VIEW,
             data: { ...item }
@@ -30,7 +33,7 @@ function IngredientCard({ item, modalOpen }) {
     });
 
 
-    const count = (bun._id === item._id) ? 2 : fillings.filter(el => el._id === item._id).length
+    const count = (bun._id === item._id) ? 2 : fillings.filter((el: { _id: string; }) => el._id === item._id).length
 
     return (
         <li ref={ref} className={styles.li} onClick={handleClick} style={{ opacity }}>
@@ -42,9 +45,5 @@ function IngredientCard({ item, modalOpen }) {
     );
 }
 
-IngredientCard.propTypes = {
-    item: typeOfIngredient,
-    modalOpen: PropTypes.func.isRequired
-}
 
 export default React.memo(IngredientCard);

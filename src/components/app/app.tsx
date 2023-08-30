@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import AppHeader from '../app-header/app-header';
@@ -9,13 +9,14 @@ import { Ingredient } from '../../pages/ingredient/ingredient';
 import { getIngredients } from '../../services/actions/ingredients';
 import Loading from '../loading/loading';
 
-export default function App() {
+export const App: FC = () => {
 
-  const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector((state) => state.ingredients)
+  const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector((state: any) => state.ingredients)
 
 
   const dispatch = useDispatch();
   useEffect(() => {
+    //@ts-ignore
     if (!ingredients.length) dispatch(getIngredients());
   },
     [dispatch, ingredients.length]
@@ -39,7 +40,7 @@ export default function App() {
               <Route path="/register" element={<ProtectedRouteElement element={<Register />} notAuth={true} />} />
               <Route path="/forgot-password" element={<ProtectedRouteElement element={<ForgotPassword />} notAuth={true} />} />
               <Route path="/reset-password" element={<ProtectedRouteElement element={<ResetPassword />} notAuth={true} />} />
-              <Route path="/profile" element={<ProtectedRouteElement element={<Profile notAuth={false} />} />} >
+              <Route path="/profile" element={<ProtectedRouteElement element={<Profile />} notAuth={false} />} >
                 <Route path='' element={<ProfileEdit />} />
                 <Route path='orders' element={<InWork />} />
               </Route>
@@ -52,3 +53,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App;

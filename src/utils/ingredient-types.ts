@@ -1,4 +1,6 @@
-const ingredientTypes = [
+import { Itypes } from "../types/ingredient-types";
+
+const ingredientTypes: Itypes[] = [
     {
         type: 'bun',
         desc: 'Булки'

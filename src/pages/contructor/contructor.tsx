@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import withModal from '../../components/hocs/withModal';
@@ -8,7 +8,7 @@ import styles from './constructor.module.css';
 
 const WithModalConstructor = withModal(BurgerConstructor)
 
-export function Constructor() {
+export const Constructor: FC = () => {
   return (
       <main className={styles.main}>
             <DndProvider backend={HTML5Backend}>

@@ -1,5 +1,6 @@
 import styles from './loading.module.css';
-const Loading = () => {
+import { FC } from 'react';
+const Loading: FC = () => {
     return (
         <div className={styles.loader}>
             <div data-glitch="Формируем заказ..." className={styles.glitch}>Формируем заказ...</div>

@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux';
+
+import { combineReducers } from '@reduxjs/toolkit';
 import { ingredientsReducer } from './ingredients';
 import { orderReducer } from './order';
 import { modalReducer } from './modal';
@@ -13,3 +14,5 @@ export const rootReducer = combineReducers({
   constructorOrder: constructorReducer,
   user: userReducer,
 });
+
+
