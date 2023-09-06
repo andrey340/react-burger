@@ -2,17 +2,42 @@ import {
     ADD_TO_CONSTRUCTOR, DEL_FROM_CONSTRUCTOR, MOVE_IN_CONSTRUCTOR
 } from "../actions/constructor";
 
-const checkoutInitialState = {
-    bun: {},
-    filling: [],
-};
+import { Iingredient } from "../../types/ingredient";
 
-export const constructorReducer = (state = checkoutInitialState, action) => {
+import { TConstructorActions } from "../actions/constructor";
+
+
+export type TConstructorState = {
+        bun: Iingredient;
+        filling: Iingredient[];
+  };
+
+  const checkoutInitialState: TConstructorState = {
+    bun:  {
+        _id: "",
+        name: "",
+        type: "",
+        proteins: 0,
+        fat: 0,
+        carbohydrates: 0,
+        calories: 0,
+        price: 0,
+        image: "",
+        image_mobile: "",
+        image_large: "",
+        __v: 0
+    },
+    filling: [],
+
+};  
+
+export const constructorReducer = (state = checkoutInitialState, action: TConstructorActions): TConstructorState => {
     switch (action.type) {
         case ADD_TO_CONSTRUCTOR: {
             if (action.item.type === 'bun') {
                 return {
                     ...state,
+                    //@ts-ignore
                     ...state.constructorOrder,
                     bun: action.item,
 
@@ -20,6 +45,7 @@ export const constructorReducer = (state = checkoutInitialState, action) => {
             } else {
                 return {
                     ...state,
+                    //@ts-ignore
                     ...state.constructorOrder,
                     filling: [...state.filling, action.item],
                 }
@@ -29,6 +55,7 @@ export const constructorReducer = (state = checkoutInitialState, action) => {
         case DEL_FROM_CONSTRUCTOR: {
             return {
                 ...state,
+                //@ts-ignore
                 ...state.constructorOrder,
                 filling: [...state.filling].filter((item, index) => index !== action.index),
             }
@@ -41,6 +68,7 @@ export const constructorReducer = (state = checkoutInitialState, action) => {
 
             return {
                 ...state,
+                //@ts-ignore
                 ...state.constructorOrder,
                 filling: newArray,
 

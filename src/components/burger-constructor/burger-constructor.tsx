@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Filling from './fillings/fillings';
 import styles from './burger-constructor.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/useReducer';
 import { Iingredient } from '../../types/ingredient';
 import { useDrop } from 'react-dnd/dist/hooks';
 import { ADD_TO_CONSTRUCTOR } from '../../services/actions/constructor';
@@ -29,7 +29,6 @@ export const BurgerConstructor: FC<IConstructor> = ({ modalOpen }) => {
       const idsArr = filling.map((el: Iingredient) => el._id)
       idsArr.push(bun._id)
       idsArr.push(bun._id) //Булочки то две должны в заказ упасть...
-      //@ts-ignore
       if (idsArr.length !== 0) dispatch(getOrder({ ingredients: idsArr }));
       modalOpen()
     } else {
@@ -114,10 +113,10 @@ export const BurgerConstructor: FC<IConstructor> = ({ modalOpen }) => {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={`${bun.name}  (верх)`}
+            text={`${bun.name}  (низ)`}
             price={bun.price}
             thumbnail={bun.image_large}
-            extraClass={`mt-4 mb-4 ml-4 mr-2 ${styles.elem}`}
+            extraClass={`mt-4 mb-4 ml-4 mr-2 ${styles.elem} ${styles.elemBottom}`}
           />
           : <ConstructorElement
             type="bottom"

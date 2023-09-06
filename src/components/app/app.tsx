@@ -1,8 +1,8 @@
 import React, { useEffect, FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/useReducer';
 import AppHeader from '../app-header/app-header';
-import { Constructor, Login, Register, ForgotPassword, ResetPassword, NotFoundPage, Profile, ProfileEdit, InWork } from '../../pages';
+import { Constructor, Login, Register, ForgotPassword, ResetPassword, NotFoundPage, Profile, ProfileEdit, InWork, Feed } from '../../pages';
 import { ProtectedRouteElement } from '../protected-route-element/protected-route-element';
 import styles from './app.module.css';
 import { Ingredient } from '../../pages/ingredient/ingredient';
@@ -44,7 +44,7 @@ export const App: FC = () => {
                 <Route path='' element={<ProfileEdit />} />
                 <Route path='orders' element={<InWork />} />
               </Route>
-              <Route path="/orders" element={<InWork />} />
+              <Route path="/orders" element={<Feed />} />
               <Route path="/*" element={<NotFoundPage />} />
               <Route path='ingredients/:id' element={<Ingredient />} />
             </Routes>

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import done from '../../../images/done.svg';
 import styles from './order-details.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../hooks/useReducer';
 
 const OrderDetails: FC = () => {
     const order = useSelector((state: any) => state.order.order)

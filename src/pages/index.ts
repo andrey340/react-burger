@@ -7,5 +7,6 @@ import { Profile } from "./profile/profile";
 import { Edit as ProfileEdit } from "./profile/edit/edit";
 import { InWork } from "./profile/in-work/in-work";
 import { Constructor } from "./contructor/contructor";
+import { Feed } from "./feed/feed";
 
-export { Login, Register, ForgotPassword, ResetPassword, NotFoundPage, Profile, ProfileEdit, InWork, Constructor };
+export { Login, Register, ForgotPassword, ResetPassword, NotFoundPage, Profile, ProfileEdit, InWork, Constructor, Feed };

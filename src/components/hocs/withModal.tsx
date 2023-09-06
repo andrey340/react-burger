@@ -6,7 +6,7 @@ import Error from '../modal/error/error';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
 import OrderDetails from '../modal/order-details/order-details';
 import Loading from '../loading/loading';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector } from '../../hooks/useReducer';
 
 
 

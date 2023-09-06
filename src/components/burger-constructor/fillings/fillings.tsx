@@ -3,7 +3,7 @@ import { Iingredient } from '../../../types/ingredient';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from '../burger-constructor.module.css';
 import { useDrop, useDrag } from 'react-dnd/dist/hooks';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../hooks/useReducer';
 import { DEL_FROM_CONSTRUCTOR, MOVE_IN_CONSTRUCTOR } from '../../../services/actions/constructor';
 
 interface IFilling  {

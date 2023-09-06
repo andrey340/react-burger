@@ -1,12 +1,20 @@
 import {GET_INGREDIENTS_REQUEST,GET_INGREDIENTS_FAILED,GET_INGREDIENTS_SUCCESS} from "../actions/ingredients";
+import { Iingredient } from "../../types/ingredient";
+import { TIngredientActions } from "../actions/ingredients";
 
-const checkoutInitialState = {
+export type TIngredientState = {
+    ingredients: Iingredient[];
+    ingredientsRequest: boolean;
+    ingredientsFailed: boolean;
+}
+
+const checkoutInitialState: TIngredientState = {
     ingredients: [],
     ingredientsRequest: true,
     ingredientsFailed: false,
 };
 
-export const ingredientsReducer = (state = checkoutInitialState, action) => {
+export const ingredientsReducer = (state = checkoutInitialState, action: TIngredientActions): TIngredientState => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {
@@ -18,6 +26,7 @@ export const ingredientsReducer = (state = checkoutInitialState, action) => {
             return {
                 ...state,
                 ingredientsFailed: false,
+                //@ts-ignore
                 ingredients: action.data,
                 ingredientsRequest: false
             };

@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './ingredient-card.module.css';
 import { Iingredient } from "../../../types/ingredient";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../hooks/useReducer';
 import { INGREDIENT_TO_VIEW } from "../../../services/actions/modal";
 import { useDrag } from "react-dnd";
 

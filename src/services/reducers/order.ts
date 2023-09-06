@@ -1,5 +1,12 @@
 import {GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_FAILED} from "../actions/order";
 
+import { TOrderActions } from "../actions/order";
+
+export type TOrderState = {
+    order: number;
+    orderRequest: boolean;
+    orderFailed: boolean;
+}
 
 const checkoutInitialState = {
     order: 0,
@@ -7,7 +14,7 @@ const checkoutInitialState = {
     orderFailed: false,
 };
 
-export const orderReducer = (state = checkoutInitialState, action) => {
+export const orderReducer = (state = checkoutInitialState, action: TOrderActions): TOrderState => {
     switch (action.type) {
 
         case GET_ORDER_REQUEST: {
@@ -23,6 +30,7 @@ export const orderReducer = (state = checkoutInitialState, action) => {
                 ...state,
                 orderRequest: false,
                 orderFailed: false,
+                //@ts-ignore
                 order: action.data
             };
         }
