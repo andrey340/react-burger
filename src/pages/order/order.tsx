@@ -13,26 +13,23 @@ export const ViewOrderPage:FC = () => {
     const dispatch = useDispatch();
     useEffect(
         () => {
-            if (!orders.length) {
+            
                 dispatch({ type: WS_FEED_START, payload: 'orders/all' });
                 return () => {
                     dispatch({ type: WS_CONNECTION_CLOSED });
                 }
-            }
-        }, [dispatch, orders.length]
+            
+        }, [dispatch]
     );
 
     const { id } = useParams();
-    const item = orders.find((item: { _id: string }) => item._id === id)
-
-    console.log(id)
-    console.log(orders)
-    console.log(item)
+    const item = orders!.find((item) => item._id === id)
+    
     return (
         <>
-            {orders.length > 0 &&
+            {orders!.length > 0 &&
                 <div className={styles.content}>
-                    <ViewOrder item={item} />
+                    <ViewOrder item={item!} />
                 </div>
             }
         </>

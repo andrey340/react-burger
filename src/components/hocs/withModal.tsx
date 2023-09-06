@@ -12,15 +12,15 @@ import { useLocation } from 'react-router-dom';
 
 
 
-const withModal = (WrappedComponent: any, helpme: string) => (props: any) => {
+const withModal = (WrappedComponent: React.ElementType) => (props: any) => {
     const navigate = useNavigate();
 
     const { modalType, ...exProps } = props;
     const { modalState, openModal, closeModal } = useModal();
-    const viewIngredient = useSelector((state: any) => state.modal.viewIngredient)
-    const orderView = useSelector((state: any) => state.modal.orderToView)
-    const order = useSelector((state: any) => state.order.order)
-    const orderRequest = useSelector((state: any) => state.order.orderRequest)
+    const viewIngredient = useSelector((state) => state.modal.viewIngredient)
+    const orderView = useSelector((state) => state.modal.orderToView)
+    const order = useSelector((state) => state.order.order)
+    const orderRequest = useSelector((state) => state.order.orderRequest)
 
     const location = useLocation();
     let from = location.state?.from || '/';
@@ -29,7 +29,7 @@ const withModal = (WrappedComponent: any, helpme: string) => (props: any) => {
         ? 'ingredient'
         : (Object.keys(orderView).length !== 0 && Object.keys(viewIngredient).length === 0) 
         ? 'feed'
-        : (order.number !== 0 && !orderRequest)
+        : (order !== 0 && !orderRequest)
             ? 'order'
             : (orderRequest)
                 ? 'loading'

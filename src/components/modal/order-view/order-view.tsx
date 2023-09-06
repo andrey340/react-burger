@@ -3,6 +3,7 @@ import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burge
 import styles from './order-view.module.css';
 import { useSelector } from '../../../hooks/useReducer';
 import { IFeedItem } from '../../../types/feed-item';
+import { russianStatus } from '../../../utils/tools';
 
 export const ViewOrder:FC<{item: IFeedItem}>= ({item}) => {
     
@@ -11,8 +12,8 @@ export const ViewOrder:FC<{item: IFeedItem}>= ({item}) => {
     let totalPrice = 0;
     const orderIngredients = item.ingredients
 
-    for (let i = 0; i < orderIngredients.length; i++) {
-        const tempIngredient = ingredients.find((item) => item._id === orderIngredients[i])
+    for (let i = 0; i < orderIngredients!.length; i++) {
+        const tempIngredient = ingredients.find((item) => item._id === orderIngredients![i])
         totalPrice += tempIngredient!.price;
 
 
@@ -34,24 +35,7 @@ export const ViewOrder:FC<{item: IFeedItem}>= ({item}) => {
     }
 
 
-    function russianStatus(status: string) {
-        let statusRus = '';
-        switch (status) {
-            case 'done':
-                statusRus = 'Выполнен'
-                break;
-            case 'created':
-                statusRus = 'Создан'
-                break;
-            case 'pending':
-                statusRus = 'Готовится'
-                break;
-
-            default:
-                statusRus = status;
-        }
-        return statusRus
-    }
+   
     return (
         <div className={styles.container}>
 

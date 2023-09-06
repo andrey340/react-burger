@@ -8,27 +8,23 @@ import { IFeedItem } from '../../../types/feed-item';
 import { getCookie } from '../../../services/utils';
 import withModal from '../../../components/hocs/withModal';
 
-const WithModalOrder = withModal(OrderFeed, 'feed')
+const WithModalOrder = withModal(OrderFeed)
 
 export const ProfileOrders: FC = () => {
 
     const orders = useSelector((state) => state.ws.orders)
-    const total = useSelector((state) => state.ws.total)
-    const totalToday = useSelector((state) => state.ws.totalToday)
-    const readyOrder = orders.map((item: { status: string; number: any; }) => (item.status === 'done' ? item.number : null))
-    const inCooking = orders.map((item: { status: string; number: any; }) => (item.status === 'pending' ? item.number : null))
     const cookie = getCookie('token');
 
     const dispatch = useDispatch();
     useEffect(
         () => {
-            if (!orders.length) {
+           
                 dispatch({ type: WS_FEED_START, payload: 'orders', token: cookie });
                 return () => {
                     dispatch({ type: WS_CONNECTION_CLOSED });
                 }
-            }
-        }, [dispatch, orders.length]
+            
+        }, [dispatch]
     );
 
     return (

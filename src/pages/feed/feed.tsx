@@ -7,7 +7,7 @@ import OrderFeed from '../../components/order-feed/order-feed';
 import { IFeedItem } from '../../types/feed-item';
 import withModal from '../../components/hocs/withModal';
 
-const WithModalOrderFeed = withModal(OrderFeed, 'feed')
+const WithModalOrderFeed = withModal(OrderFeed)
 
 
 export const Feed:FC = () => {
@@ -15,19 +15,17 @@ export const Feed:FC = () => {
     const orders = useSelector((state) => state.ws.orders)
     const total = useSelector((state) => state.ws.total)
     const totalToday = useSelector((state) => state.ws.totalToday)
-    const readyOrder = orders.map((item: { status: string; number: any; }) => (item.status === 'done' ? item.number : null))
-    const inCooking = orders.map((item: { status: string; number: any; }) => (item.status === 'pending' ? item.number : null))
+    const readyOrder = orders!.map((item) => (item.status === 'done' ? item.number : null))
+    const inCooking = orders!.map((item) => (item.status === 'pending' ? item.number : null))
 
     const dispatch = useDispatch();
     useEffect(
         () => {
-            if (!orders.length) {
                 dispatch({ type: WS_FEED_START, payload: 'orders/all' });
                 return () => {
                     dispatch({ type: WS_CONNECTION_CLOSED });
                 }
-            }
-        }, [dispatch, orders.length]
+        }, [dispatch]
     );
 
     return (
@@ -35,7 +33,7 @@ export const Feed:FC = () => {
             <h2 className='text text_type_main-large mb-5'>Лента заказов</h2>
             <div className={styles.wrapper}>
                 <div className={`p-2 ${styles.orders} ${styles.scrollbar}`}>
-                    {orders.map((item: IFeedItem, index: React.Key) => (
+                    {orders!.map((item: IFeedItem, index: number) => (
 
                         <WithModalOrderFeed key={index} item={item} />
                     )
@@ -46,7 +44,7 @@ export const Feed:FC = () => {
                         <div className={`mr-9 ${styles.done}`}>
                             <h2 className='text text_type_main-medium'>Готовы:</h2>
                             <ul>
-                                {readyOrder.slice(0, 5).map((item: string, index: React.Key) => (
+                                {readyOrder.slice(0, 5).map((item, index: number) => (
                                     <li key={index} className='text text_type_digits-default'>{item}</li>
                                 ))}
                             </ul>
@@ -54,7 +52,7 @@ export const Feed:FC = () => {
                         <div className={styles.inCooking}>
                             <h2 className='text text_type_main-medium'>В работе:</h2>
                             <ul>
-                                {inCooking.slice(0, 5).map((item: string, index: React.Key) => (
+                                {inCooking.slice(0, 5).map((item, index: number) => (
                                     <li key={index} className='text text_type_digits-default'>{item}</li>
                                 ))}
                             </ul>

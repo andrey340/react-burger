@@ -1,6 +1,6 @@
 export interface IFeedItem {
     _id: string;
-    ingredients: [];
+    ingredients?: [];
     status: string;
     name: string;
     createdAt: string;

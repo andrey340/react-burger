@@ -1,9 +1,10 @@
 import { WS_FEED_START, WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTION_CLOSED, WS_GET_FEED, WS_SEND_MESSAGE } from '../actions/ws'
 import { TWSActions } from "../actions/ws";
+import { IFeedItem } from '../../types/feed-item';
 
 export type TWSState = {
     wsConnected: boolean;
-    orders: any;
+    orders: IFeedItem[];
     total: number,
     totalToday: number,
     error?: Event;

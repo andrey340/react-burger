@@ -1,6 +1,5 @@
 
 import type { Middleware, MiddlewareAPI } from 'redux';
-
 import type { RootState, AppDispatch } from '../../types/reducer';
 import type { TWSActions } from '../actions/ws';
 
@@ -9,13 +8,15 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
         let socket: WebSocket | null = null;
 
     return next => (action: TWSActions) => {
-      const { dispatch, getState } = store;
+      const { dispatch } = store;
       //@ts-ignore
       const { type, payload, token } = action;
+
+
  
       if (type === 'WS_FEED_START') {
             // объект класса WebSocket
-            if (token === '') {
+            if (token === '' || token == undefined) {
               socket = new WebSocket(wsUrl + payload);
             } else {
               socket = new WebSocket(wsUrl + payload + '?token=' + token);
@@ -49,6 +50,11 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
           const message = payload;
                     // функция для отправки сообщения на сервер
           socket.send(JSON.stringify(message));
+        }
+
+        
+        if(type === 'WS_CONNECTION_CLOSED'){
+          socket.close(1000, 'user logged out')
         }
       }
 

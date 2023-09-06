@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { useSelector, useDispatch } from '../../hooks/useReducer';
 import { IFeedItem } from '../../types/feed-item';
 import { ORDER_TO_VIEW } from '../../services/actions/modal';
-
+import { russianStatus } from '../../utils/tools';
 
 interface IOrderFeed {
     item: IFeedItem;
@@ -18,8 +18,8 @@ const OrderFeed:FC<IOrderFeed> = ( {item, modalOpen}) => {
     let totalPrice = 0;
     const orderIngredients = item.ingredients
 
-    for (let i = 0; i < orderIngredients.length; i++) {
-        const tempIngredient:any = ingredients.find((item) => item._id === orderIngredients[i])
+    for (let i = 0; i < orderIngredients!.length; i++) {
+        const tempIngredient:any = ingredients.find((item) => item._id === orderIngredients![i])
         totalPrice += tempIngredient.price;
         if (i <= 6) {
             if (i === 6) {
@@ -27,7 +27,7 @@ const OrderFeed:FC<IOrderFeed> = ( {item, modalOpen}) => {
                     <li className={styles.ingredient} key={i}>
                         <img src={tempIngredient.image_large} alt='ingredient' />
                         <div className={`${styles.last_ingredient} text text_type_digits-default`}>
-                            +{orderIngredients.length - i}
+                            +{orderIngredients!.length - i}
                         </div>
                     </li>
                 );
@@ -48,25 +48,6 @@ const OrderFeed:FC<IOrderFeed> = ( {item, modalOpen}) => {
             data: { ...item }
         })
         modalOpen?.()
-    }
-
-    function russianStatus(status: string) {
-        let statusRus: string = '';
-            switch(status) {
-                case 'done':
-                    statusRus = 'Выполнен'
-                break;
-                case 'created':
-                    statusRus = 'Создан'
-                break;
-                case 'pending':
-                    statusRus = 'Готовится'
-                break;
-                
-                default: 
-                    statusRus = status;
-            }
-        return statusRus
     }
 
     return (
