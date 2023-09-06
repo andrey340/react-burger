@@ -1,15 +1,19 @@
-import { WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTION_CLOSED, WS_GET_MESSAGE, WS_SEND_MESSAGE } from '../actions/ws'
+import { WS_FEED_START, WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTION_CLOSED, WS_GET_FEED, WS_SEND_MESSAGE } from '../actions/ws'
 import { TWSActions } from "../actions/ws";
 
 export type TWSState = {
     wsConnected: boolean;
-    messages: any;
+    orders: any;
+    total: number,
+    totalToday: number,
     error?: Event;
 }
 
 const checkoutInitialState: TWSState = {
     wsConnected: false,
-    messages: []
+    orders: [],
+    total: 0,
+    totalToday: 0,
 };
 
 export const wsReducer = (state = checkoutInitialState, action: TWSActions): TWSState => {
@@ -35,12 +39,15 @@ export const wsReducer = (state = checkoutInitialState, action: TWSActions): TWS
             wsConnected: false
           };
     
-        case WS_GET_MESSAGE:
+        case WS_GET_FEED:
           const msg = { ...action.payload};
+          
           return {
             ...state,
             error: undefined,
-            messages: [...state.messages, msg]
+            orders: msg.orders,
+            total: msg.total,
+            totalToday: msg.totalToday
           };
     
         default:

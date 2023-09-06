@@ -11,12 +11,18 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
     return next => (action: TWSActions) => {
       const { dispatch, getState } = store;
       //@ts-ignore
-      const { type, payload } = action;
+      const { type, payload, token } = action;
  
-      if (type === 'WS_CONNECTION_START') {
+      if (type === 'WS_FEED_START') {
             // объект класса WebSocket
-        socket = new WebSocket(wsUrl);
+            if (token === '') {
+              socket = new WebSocket(wsUrl + payload);
+            } else {
+              socket = new WebSocket(wsUrl + payload + '?token=' + token);
+            }
+       
       }
+      
       if (socket) {
 
                 // функция, которая вызывается при открытии сокета
@@ -32,7 +38,7 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
                 // функция, которая вызывается при получения события от сервера
         socket.onmessage = event => {
           const { data } = event;
-          dispatch({ type: 'WS_GET_MESSAGE', payload: data });
+          dispatch({ type: 'WS_GET_FEED', payload: JSON.parse(data) });
         };
                 // функция, которая вызывается при закрытии соединения
         socket.onclose = event => {

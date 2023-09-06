@@ -39,7 +39,6 @@ export const BurgerConstructor: FC<IConstructor> = ({ modalOpen }) => {
 
   const bun = useSelector((state: any) => state.constructorOrder.bun)
   const filling = useSelector((state: any) => state.constructorOrder.filling);
-  const ingredients = useSelector((state: any) => state.ingredients.ingredients);
 
 
 
@@ -52,14 +51,13 @@ export const BurgerConstructor: FC<IConstructor> = ({ modalOpen }) => {
     })
   }
 
- 
+
   useEffect(
     () => {
-      if (Object.keys(bun).length === 0) {
-        // const bunToAdd = ingredients.find((el: Iingredient) => el.type === 'bun')
-        // toOrder(bunToAdd)
+      if (Object.keys(bun).length === 0 || bun._id === '') {
         setBun(false)
-        console.log(bunAdded)
+      } else {
+        setBun(true)
       }
     },
     []

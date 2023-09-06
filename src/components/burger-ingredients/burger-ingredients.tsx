@@ -9,7 +9,7 @@ import { Iingredient } from '../../types/ingredient';
 import { Itypes } from '../../types/ingredient-types';
 import styles from './burger-ingredients.module.css';
 
-const WithModalIngredientCard = withModal(IngredientCard)
+const WithModalIngredientCard = withModal(IngredientCard, 'ingredient')
 
 export const BurgerIngredients: FC = () => {
 

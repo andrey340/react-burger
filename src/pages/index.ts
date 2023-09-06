@@ -8,5 +8,6 @@ import { Edit as ProfileEdit } from "./profile/edit/edit";
 import { InWork } from "./profile/in-work/in-work";
 import { Constructor } from "./contructor/contructor";
 import { Feed } from "./feed/feed";
+import { ProfileOrders } from "./profile/orders/orders";
 
-export { Login, Register, ForgotPassword, ResetPassword, NotFoundPage, Profile, ProfileEdit, InWork, Constructor, Feed };
+export { Login, Register, ForgotPassword, ResetPassword, NotFoundPage, Profile, ProfileEdit, InWork, Constructor, Feed, ProfileOrders };

@@ -13,8 +13,8 @@ interface ICard {
 
 export const IngredientCard: FC<ICard> = ({ item, modalOpen }) => {
 
-    const bun = useSelector((state: any) => state.constructorOrder.bun)
-    const fillings = useSelector((state: any) => state.constructorOrder.filling)
+    const bun = useSelector((state) => state.constructorOrder.bun)
+    const fillings = useSelector((state) => state.constructorOrder.filling)
 
     const dispatcher = useDispatch();
     const handleClick = () => {

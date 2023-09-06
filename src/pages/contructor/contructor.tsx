@@ -6,7 +6,7 @@ import { DndProvider } from 'react-dnd/dist/core';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import styles from './constructor.module.css';
 
-const WithModalConstructor = withModal(BurgerConstructor)
+const WithModalConstructor = withModal(BurgerConstructor, '')
 
 export const Constructor: FC = () => {
   return (

@@ -1,0 +1,55 @@
+.order {
+    border-radius: 40px;
+    background: #1C1C21;
+    cursor: pointer;
+}
+
+.desc, .stats {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.desc ul {
+    list-style: none;
+    display: flex;
+    flex-flow: row;
+
+}
+
+.desc ul li {
+    margin-left: -18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border-radius: 100px;
+    border: 2px solid #801AB2;
+    background:#131316;
+    position: relative;
+    overflow: hidden;
+    height: 64px;
+    width: 64px;
+}
+
+.desc ul li img {
+    height: 54px;
+}
+
+.last_ingredient {
+    margin-left: -108px;
+    background: rgb(47 47 55 / 50%);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.totalPrice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FC, SyntheticEvent  } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../../hooks/useReducer';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { userApi } from '../../../services/actions/user';
 import styles from './edit.module.css';

@@ -1,9 +1,11 @@
-import {INGREDIENT_TO_VIEW, CLOSE_MODAL} from "../actions/modal";
+import {INGREDIENT_TO_VIEW, CLOSE_MODAL, ORDER_TO_VIEW} from "../actions/modal";
 import { TModalActions } from "../actions/modal";
 import { Iingredient } from "../../types/ingredient";
+import { IFeedItem } from "../../types/feed-item";
 
 export type TModalState = {
-    viewIngredient: Iingredient
+    viewIngredient: Iingredient;
+    orderToView: IFeedItem;
 }
 
 const checkoutInitialState: TModalState = {
@@ -21,6 +23,15 @@ const checkoutInitialState: TModalState = {
         image_large: "",
         __v: 0
     },
+    orderToView: {
+        _id: "",
+        ingredients: [],
+        status: "",
+        name: "",
+        createdAt: "",
+        updatedAt: "",
+        number: 0
+    }
 };
 
 export const modalReducer = (state = checkoutInitialState, action: TModalActions) => {
@@ -28,8 +39,11 @@ export const modalReducer = (state = checkoutInitialState, action: TModalActions
         case INGREDIENT_TO_VIEW: {
             return { ...state, viewIngredient: action.data }
         }
+        case ORDER_TO_VIEW: {
+            return { ...state, orderToView: action.data }
+        }
         case CLOSE_MODAL: {
-            return { ...state, viewIngredient: {}, order: 0 }
+            return { ...state, viewIngredient: {}, orderToView: {}, order: 0 }
         }
         default: {
             return state;
