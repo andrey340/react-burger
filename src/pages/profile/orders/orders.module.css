@@ -1,0 +1,31 @@
+.container {
+    overflow-x: auto;
+    max-height: calc(100vh - 300px);
+    max-width: 50%;
+}
+
+.scrollbar {
+    --scrollbar-foreground: #8585AD;
+    --scrollbar-background: #2F2F37;
+    --scrollbar-size: 8px;
+    /* плашка-бегунок, фон */
+    scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    /* в основном для вертикальных полос прокрутки */
+    height: var(--scrollbar-size);
+    /* в основном для горизонтальных полос прокрутки */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    /* плашка-бегунок */
+    background: var(--scrollbar-foreground);
+    /* фон */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    /* фон */
+    background: var(--scrollbar-background);
+}

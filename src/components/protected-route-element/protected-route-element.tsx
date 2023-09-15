@@ -1,7 +1,7 @@
 import React, { FC, ReactElement }  from 'react';
 
 import { Navigate, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks/useReducer';
 import { getCookie } from '../../services/utils';
 import { getUser } from '../../services/actions/user';
 
@@ -19,11 +19,10 @@ export const ProtectedRouteElement: FC<IProtected> = ({ element, notAuth = false
     const dispatch = useDispatch();
 
     const location = useLocation();
-    const from = location.state?.from || '/';
+    let from = location.state?.from || '/';
 
     if (!isUserAuth && cookie && cookie !== '' && !isLoading) {
-        //@ts-ignore
-        dispatch(getUser('get'));
+        dispatch(getUser());
     } 
 
     if (isUserAuth && notAuth && !isLoading) {

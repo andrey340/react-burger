@@ -1,0 +1,61 @@
+.ingredient img {
+    height: 65px;
+}
+
+.ingredient {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.items {
+    max-height: 370px;
+    overflow-y: auto;
+}
+
+.items ul {
+    list-style: none;
+    padding: 0;
+}
+
+.name,
+.price,
+.totalPrice {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.scrollbar {
+    --scrollbar-foreground: #8585AD;
+    --scrollbar-background: #2F2F37;
+    --scrollbar-size: 8px;
+    /* плашка-бегунок, фон */
+    scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    /* в основном для вертикальных полос прокрутки */
+    height: var(--scrollbar-size);
+    /* в основном для горизонтальных полос прокрутки */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    /* плашка-бегунок */
+    background: var(--scrollbar-foreground);
+    /* фон */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    /* фон */
+    background: var(--scrollbar-background);
+}

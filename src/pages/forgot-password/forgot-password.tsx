@@ -20,14 +20,14 @@ export const ForgotPassword: FC = () => {
         e.preventDefault();
 
         dispatch(
-            //@ts-ignore
+           //@ts-ignore
             userApi(
                 'forgot',
                 {
                     'email': email
                 },
                 () => navigate('/reset-password')
-            )!
+            )
         )
     }
 

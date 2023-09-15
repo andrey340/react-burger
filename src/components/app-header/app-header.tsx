@@ -15,8 +15,8 @@ export const AppHeader: FC = () => {
         <MenuItem to='/' text='Конструтор' active={currentPage === `constructor`} onClick={() => setPage('constructor')} >
           <BurgerIcon type={currentPage === `constructor` ? `primary` : `secondary`} />
         </MenuItem>
-        <MenuItem to='/orders' text='Лента заказов' active={currentPage === `orders`} onClick={() => setPage('orders')} >
-          <ListIcon type={currentPage === `orders` ? `primary` : `secondary`} />
+        <MenuItem to='/feed' text='Лента заказов' active={currentPage === `feed`} onClick={() => setPage('feed')} >
+          <ListIcon type={currentPage === `feed` ? `primary` : `secondary`} />
         </MenuItem>
       </nav>
 

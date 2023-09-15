@@ -60,3 +60,7 @@
     align-items: center;
     justify-content: flex-end;
 }
+
+.elemBottom img {
+  transform: rotateX(180deg);
+}

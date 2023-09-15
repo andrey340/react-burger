@@ -6,31 +6,46 @@ import Error from '../modal/error/error';
 import IngredientDetails from '../modal/ingredient-details/ingredient-details';
 import OrderDetails from '../modal/order-details/order-details';
 import Loading from '../loading/loading';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { ViewOrder } from '../modal/order-view/order-view';
+import { useSelector } from '../../hooks/useReducer';
+import { useLocation } from 'react-router-dom';
 
 
 
-const withModal = (WrappedComponent: any) => (props: any) => {
+const withModal = (WrappedComponent: React.ElementType) => (props: any) => {
     const navigate = useNavigate();
 
     const { modalType, ...exProps } = props;
     const { modalState, openModal, closeModal } = useModal();
-    const viewIngredient = useSelector((state: any) => state.modal.viewIngredient)
-    const order = useSelector((state: any) => state.order.order)
-    const orderRequest = useSelector((state: any) => state.order.orderRequest)
+    const viewIngredient = useSelector((state) => state.modal.viewIngredient)
+    const orderView = useSelector((state) => state.modal.orderToView)
+    const order = useSelector((state) => state.order.order)
+    const orderRequest = useSelector((state) => state.order.orderRequest)
 
+    const location = useLocation();
+    let from = location.state?.from || '/';
 
-    const type = (Object.keys(viewIngredient).length !== 0)
+    const type = (Object.keys(viewIngredient).length !== 0 && Object.keys(orderView).length === 0)
         ? 'ingredient'
-        : (order.number !== 0 && !orderRequest)
+        : (Object.keys(orderView).length !== 0 && Object.keys(viewIngredient).length === 0) 
+        ? 'feed'
+        : (order !== 0 && !orderRequest)
             ? 'order'
             : (orderRequest)
                 ? 'loading'
                 : 'error';
+
     const title = (type === 'ingredient') ? 'Детали ингредиента' : ''
 
-    if (type === 'ingredient') {
+
+
+    if ( type === 'ingredient' ) {
         window.history.replaceState(null, viewIngredient.name, "/ingredients/" + viewIngredient._id)
+        //navigate(-1);
+    }
+
+    if ( type === 'feed' ) {
+        window.history.replaceState(null, viewIngredient.name, '/feed/' + orderView._id)
         //navigate(-1);
     }
 
@@ -50,6 +65,7 @@ const withModal = (WrappedComponent: any) => (props: any) => {
                             'ingredient': <IngredientDetails item={viewIngredient} />,
                             'order': <OrderDetails />,
                             'loading': <Loading />,
+                            'feed': <ViewOrder item={orderView}/>,
                         }[type]
                     }
                 </Modal>

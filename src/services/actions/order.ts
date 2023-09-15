@@ -1,12 +1,26 @@
 import { API_URL } from "../config";
 import { getCookie } from "../utils";
 import { checkResponse } from "../../utils/tools";
-export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
-export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
-export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
+export const GET_ORDER_REQUEST: 'GET_ORDER_REQUEST' = 'GET_ORDER_REQUEST';
+export const GET_ORDER_SUCCESS: 'GET_ORDER_SUCCESS' = 'GET_ORDER_SUCCESS';
+export const GET_ORDER_FAILED: 'GET_ORDER_FAILED' = 'GET_ORDER_FAILED';
 
-export function getOrder(data) {
-    return function (dispatch) {
+export interface IOrderReqAction {
+    readonly type: typeof GET_ORDER_REQUEST;
+}
+
+export interface IOrderSuccessAction {
+    readonly type: typeof GET_ORDER_SUCCESS;
+}
+
+export interface IOrderFailedAction {
+    readonly type: typeof GET_ORDER_FAILED;
+}
+
+export type TOrderActions = IOrderReqAction | IOrderSuccessAction | IOrderFailedAction;
+
+export function getOrder(data: any) {
+    return function (dispatch: any) {
         dispatch({
             type: GET_ORDER_REQUEST
         });

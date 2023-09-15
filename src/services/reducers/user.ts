@@ -32,6 +32,14 @@ import {
     GET_REFRESH_FAILED,
 } from "../actions/user";
 
+import { TUserActions } from "../actions/user";
+
+export type TUserState = {
+    isUserAuth: boolean;
+    isLoading: boolean;
+    requestError: string;
+    user: {email: string; name: string};
+}
 
 const checkoutInitialState = {
     isUserAuth: false,
@@ -43,7 +51,7 @@ const checkoutInitialState = {
     }
 };
 
-export const userReducer = (state = checkoutInitialState, action) => {
+export const userReducer = (state = checkoutInitialState, action: TUserActions):TUserState => {
     switch (action.type) {
 
         case GET_AUTH_REQUEST: 
@@ -69,6 +77,7 @@ export const userReducer = (state = checkoutInitialState, action) => {
                 ...state,
                 isLoading: false,
                 isUserAuth: true,
+                //@ts-ignore
                 user: action.data.user,
                 requestError: ''
             };
@@ -89,7 +98,10 @@ export const userReducer = (state = checkoutInitialState, action) => {
             return {
                 ...state,
                 isUserAuth: false,
-                user: {}
+                user: {
+                    email: "",
+                    name: ""
+                }
             };
         }
 
@@ -105,6 +117,7 @@ export const userReducer = (state = checkoutInitialState, action) => {
                 ...state,
                 isLoading: false,
                 isUserAuth: false,
+                 //@ts-ignore
                 requestError: action.data
             };
         }

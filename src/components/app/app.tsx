@@ -1,11 +1,12 @@
 import React, { useEffect, FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/useReducer';
 import AppHeader from '../app-header/app-header';
-import { Constructor, Login, Register, ForgotPassword, ResetPassword, NotFoundPage, Profile, ProfileEdit, InWork } from '../../pages';
+import { Constructor, Login, Register, ForgotPassword, ResetPassword, NotFoundPage, Profile, ProfileEdit, InWork, Feed, ProfileOrders } from '../../pages';
 import { ProtectedRouteElement } from '../protected-route-element/protected-route-element';
 import styles from './app.module.css';
 import { Ingredient } from '../../pages/ingredient/ingredient';
+import { ViewOrderPage } from '../../pages/order/order';
 import { getIngredients } from '../../services/actions/ingredients';
 import Loading from '../loading/loading';
 
@@ -16,7 +17,6 @@ export const App: FC = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    //@ts-ignore
     if (!ingredients.length) dispatch(getIngredients());
   },
     [dispatch, ingredients.length]
@@ -42,11 +42,12 @@ export const App: FC = () => {
               <Route path="/reset-password" element={<ProtectedRouteElement element={<ResetPassword />} notAuth={true} />} />
               <Route path="/profile" element={<ProtectedRouteElement element={<Profile />} notAuth={false} />} >
                 <Route path='' element={<ProfileEdit />} />
-                <Route path='orders' element={<InWork />} />
+                <Route path='orders' element={<ProfileOrders />} />
               </Route>
-              <Route path="/orders" element={<InWork />} />
+              <Route path="/feed" element={<Feed />} />
               <Route path="/*" element={<NotFoundPage />} />
-              <Route path='ingredients/:id' element={<Ingredient />} />
+              <Route path='/ingredients/:id' element={<Ingredient />} />
+              <Route path='/feed/:id' element={<ViewOrderPage />} />
             </Routes>
           </main>
       }

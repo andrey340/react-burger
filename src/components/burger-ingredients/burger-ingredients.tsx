@@ -2,7 +2,7 @@ import React, { useMemo, FC } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientTypes from '../../utils/ingredient-types';
 import IngredientCard from './ingredient-card/ingredient-card';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/useReducer';
 import { InView } from 'react-intersection-observer';
 import withModal from '../hocs/withModal';
 import { Iingredient } from '../../types/ingredient';
