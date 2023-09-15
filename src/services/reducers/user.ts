@@ -41,7 +41,7 @@ export type TUserState = {
     user: {email: string; name: string};
 }
 
-const checkoutInitialState = {
+export const checkoutInitialState = {
     isUserAuth: false,
     isLoading: false,
     requestError: '',

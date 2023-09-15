@@ -12,7 +12,7 @@ export type TConstructorState = {
         filling: Iingredient[];
   };
 
-  const checkoutInitialState: TConstructorState = {
+export const checkoutInitialState: TConstructorState = {
     bun:  {
         _id: "",
         name: "",

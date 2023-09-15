@@ -8,7 +8,7 @@ export type TModalState = {
     orderToView: IFeedItem;
 }
 
-const checkoutInitialState: TModalState = {
+export const checkoutInitialState: TModalState = {
     viewIngredient: {
         _id: "",
         name: "",
@@ -43,7 +43,7 @@ export const modalReducer = (state = checkoutInitialState, action: TModalActions
             return { ...state, orderToView: action.data }
         }
         case CLOSE_MODAL: {
-            return { ...state, viewIngredient: {}, orderToView: {}, order: 0 }
+            return { ...state, viewIngredient: {}, orderToView: {}}
         }
         default: {
             return state;

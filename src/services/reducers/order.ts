@@ -8,7 +8,7 @@ export type TOrderState = {
     orderFailed: boolean;
 }
 
-const checkoutInitialState = {
+export const checkoutInitialState = {
     order: 0,
     orderRequest: false,
     orderFailed: false,
