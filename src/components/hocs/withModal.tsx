@@ -33,7 +33,7 @@ const withModal = (WrappedComponent: React.ElementType) => (props: any) => {
             ? 'order'
             : (orderRequest)
                 ? 'loading'
-                : 'error';
+                : 'ingredient';
 
     const title = (type === 'ingredient') ? 'Детали ингредиента' : ''
 

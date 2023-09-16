@@ -129,7 +129,7 @@ export const BurgerConstructor: FC<IConstructor> = ({ modalOpen }) => {
       <div className={`mt-10 ${styles.total}`}>
         <p className="text text_type_digits-medium mr-2">{totalCost}</p>
         <CurrencyIcon type="primary" />
-        <Button htmlType="button" type="primary" size="large" extraClass='ml-10' onClick={handleClick} disabled={bunAdded ? false : true}>
+        <Button id='orderBtn' htmlType="button" type="primary" size="large" extraClass='ml-10' onClick={handleClick} disabled={bunAdded ? false : true}>
           Оформить заказ
         </Button>
       </div>
