@@ -12,7 +12,7 @@ import Loading from '../loading/loading';
 
 export const App: FC = () => {
 
-  const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector((state: any) => state.ingredients)
+  const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector((state) => state.ingredients)
 
 
   const dispatch = useDispatch();

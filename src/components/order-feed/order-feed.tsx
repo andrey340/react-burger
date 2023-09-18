@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from '../../hooks/useReducer';
 import { IFeedItem } from '../../types/feed-item';
 import { ORDER_TO_VIEW } from '../../services/actions/modal';
 import { russianStatus } from '../../utils/tools';
+import { Iingredient } from '../../types/ingredient';
 
 interface IOrderFeed {
     item: IFeedItem;
@@ -19,7 +20,7 @@ const OrderFeed: FC<IOrderFeed> = ({ item, modalOpen }) => {
     const orderIngredients = item.ingredients
 
     for (let i = 0; i < orderIngredients!.length; i++) {
-        const tempIngredient: any = ingredients.find((item) => item._id === orderIngredients![i])
+        const tempIngredient: Iingredient = ingredients.find((item) => item._id === orderIngredients![i]) as Iingredient
         if (tempIngredient != undefined) {
             totalPrice += tempIngredient.price;
             if (i <= 6) {

@@ -16,9 +16,8 @@ export function setCookie(name: string,
     d.setTime(d.getTime() + exp * 1000);
     exp = props.expires = d;
   }
-  //@ts-ignore
-  if (exp && exp.toUTCString) {
-    //@ts-ignore
+  
+  if (exp && exp instanceof Date) {
     props.expires = exp.toUTCString();
   }
   value = encodeURIComponent(value);
@@ -34,6 +33,5 @@ export function setCookie(name: string,
 }
 
   export function deleteCookie(name: string) {
-    //@ts-ignore
-    setCookie(name, null, { expires: -1 });
+    setCookie(name, '', { expires: -1 });
   }

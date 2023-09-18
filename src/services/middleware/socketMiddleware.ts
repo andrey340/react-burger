@@ -9,7 +9,6 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
 
     return next => (action: TWSActions) => {
       const { dispatch } = store;
-      //@ts-ignore
       const { type, payload, token } = action;
 
 

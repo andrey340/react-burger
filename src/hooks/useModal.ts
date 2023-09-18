@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../hooks/useReducer";
 import { CLOSE_MODAL } from "../services/actions/modal";
 
 export const useModal = () => {

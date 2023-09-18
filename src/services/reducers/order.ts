@@ -30,7 +30,6 @@ export const orderReducer = (state = checkoutInitialState, action: TOrderActions
                 ...state,
                 orderRequest: false,
                 orderFailed: false,
-                //@ts-ignore
                 order: action.data
             };
         }

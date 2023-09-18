@@ -35,7 +35,7 @@ export const Feed:FC = () => {
                 <div className={`p-2 ${styles.orders} ${styles.scrollbar}`}>
                     {orders!.map((item: IFeedItem, index: number) => (
 
-                        <WithModalOrderFeed key={index} item={item} />
+                        <WithModalOrderFeed key={index} item={item} modalType='feed'/>
                     )
                     )}
                 </div>

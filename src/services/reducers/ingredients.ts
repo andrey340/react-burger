@@ -26,7 +26,6 @@ export const ingredientsReducer = (state = checkoutInitialState, action: TIngred
             return {
                 ...state,
                 ingredientsFailed: false,
-                //@ts-ignore
                 ingredients: action.data,
                 ingredientsRequest: false
             };

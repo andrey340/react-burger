@@ -1,6 +1,7 @@
 import { API_URL } from "../config";
 import { setCookie, deleteCookie, getCookie } from "../utils";
 import { checkResponse } from "../../utils/tools";
+import { Dispatch } from "redux";
 
 export const GET_AUTH_REQUEST: 'GET_AUTH_REQUEST' = 'GET_AUTH_REQUEST';
 export const GET_AUTH_SUCCESS: 'GET_AUTH_SUCCESS' = 'GET_AUTH_SUCCESS';
@@ -37,98 +38,122 @@ export const GET_REFRESH_FAILED: 'GET_REFRESH_FAILED' = 'GET_REFRESH_FAILED';
 
 export interface IAuthReqAction {
     readonly type: typeof GET_AUTH_REQUEST;
+    readonly data?: any;
 }
 
 export interface IAuthSuccessAction {
     readonly type: typeof GET_AUTH_SUCCESS;
+    readonly data?: any;
 }
 
 export interface IAuthFailedAction {
     readonly type: typeof GET_AUTH_FAILED;
+    readonly data?: any;
 }
 
 export interface IRegReqAction {
     readonly type: typeof GET_REG_REQUEST;
+    readonly data?: any;
 }
 
 export interface IRegSuccessAction {
     readonly type: typeof GET_REG_SUCCESS;
+    readonly data?: any;
 }
 
 export interface IRegFailedAction {
     readonly type: typeof GET_REG_FAILED;
+    readonly data?: any;
 }
 
 export interface IForgotReqAction {
     readonly type: typeof GET_FORGOT_REQUEST;
+    readonly data?: any;
 }
 
 export interface IForgotSuccessAction {
     readonly type: typeof GET_FORGOT_SUCCESS;
+    readonly data?: any;
 }
 
 export interface IForgotFailedAction {
     readonly type: typeof GET_FORGOT_FAILED;
+    readonly data?: any;
 }
 
 export interface IResetReqAction {
     readonly type: typeof GET_RESET_REQUEST;
+    readonly data?: any;
 }
 
 export interface IResetSuccessAction {
     readonly type: typeof GET_RESET_SUCCESS;
+    readonly data?: any;
 }
 
 export interface IResetFailedAction {
     readonly type: typeof GET_RESET_FAILED;
+    readonly data?: any;
 }
 
 export interface ILogoutReqAction {
     readonly type: typeof GET_LOGOUT_REQUEST;
+    readonly data?: any;
 }
 
 export interface ILogoutSuccessAction {
     readonly type: typeof GET_LOGOUT_SUCCESS;
+    readonly data?: any;
 }
 
 export interface ILogoutFailedAction {
     readonly type: typeof GET_LOGOUT_FAILED;
+    readonly data?: any;
 }
 
 export interface IEditUserReqAction {
     readonly type: typeof GET_EDIT_REQUEST;
+    readonly data?: any;
 }
 
 export interface IEditUserSuccessAction {
     readonly type: typeof GET_EDIT_SUCCESS;
+    readonly data?: any;
 }
 
 export interface IEditUserFailedAction {
     readonly type: typeof GET_EDIT_FAILED;
+    readonly data?: any;
 }
 
 export interface IUserReqAction {
     readonly type: typeof GET_USER_REQUEST;
+    readonly data?: any;
 }
 
 export interface IUserSuccessAction {
     readonly type: typeof GET_USER_SUCCESS;
+    readonly data?: any;
 }
 
 export interface IUserFailedAction {
     readonly type: typeof GET_USER_FAILED;
+    readonly data?: any;
 }
 
 export interface IRefreshReqAction {
     readonly type: typeof GET_REFRESH_REQUEST;
+    readonly data?: any;
 }
 
 export interface IRefreshSuccessAction {
     readonly type: typeof GET_REFRESH_SUCCESS;
+    readonly data?: any;
 }
 
 export interface IRefreshFailedAction {
     readonly type: typeof GET_REFRESH_FAILED;
+    readonly data?: any;
 }
 
 export type TUserActions = IAuthFailedAction
@@ -158,8 +183,8 @@ export type TUserActions = IAuthFailedAction
 
 
 export function getUser() {
-    //@ts-ignore
-    return async dispatch => {
+  
+    return async (dispatch: Dispatch) => {
         dispatch({
             type: GET_USER_REQUEST
         });
@@ -191,8 +216,8 @@ export function getUser() {
     }
 }
 
- //@ts-ignore
-export function userApi(type, data = {}, callbackFunction = () => { }) {
+ 
+export function userApi(type: string, data: {} | undefined = {}, callbackFunction = () => { }) {
     let endpoint = '';
     let method = 'POST';
     let typeMatch = false;
@@ -257,8 +282,8 @@ export function userApi(type, data = {}, callbackFunction = () => { }) {
     }
 
     if (typeMatch) {
-         //@ts-ignore
-        return async dispatch => {
+         
+        return async (dispatch: Dispatch) => {
             dispatch({
                 type: reqAction
             });
@@ -318,10 +343,9 @@ export function userApi(type, data = {}, callbackFunction = () => { }) {
         }
     }
 }
- //@ts-ignore
-const refreshToken = (afterRefresh) => (type, dataAfter, callbackFunction) => {
-     //@ts-ignore
-    return async dispatch => {
+ 
+const refreshToken = (afterRefresh: any) => (type: string, dataAfter: any, callbackFunction: void) => {
+    return async (dispatch: Dispatch) => {
         dispatch({
             type: GET_REFRESH_REQUEST
         });
@@ -354,7 +378,7 @@ const refreshToken = (afterRefresh) => (type, dataAfter, callbackFunction) => {
                         setCookie('token', authToken, { expires: 20 * 60 });
                         localStorage.setItem('refreshToken', data.refreshToken);
                     }
-
+                    
                     dispatch(afterRefresh(type, dataAfter, callbackFunction))
 
                 } else {
