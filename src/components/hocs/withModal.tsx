@@ -24,14 +24,10 @@ const withModal = (WrappedComponent: React.ElementType) => (props: {modalType?: 
 
     if ( modalType === 'ingredient' && viewIngredient._id) {
         window.history.replaceState(null, viewIngredient.name, "/ingredients/" + viewIngredient._id)
-        //navigate("/ingredients/" + viewIngredient._id, {replace: true});
-        //window.location.hash = "/ingredients/" + viewIngredient._id;
-        //history.replace
     }
 
     if ( modalType === 'feed' && orderView._id) {
         window.history.replaceState(null, viewIngredient.name, '/feed/' + orderView._id)
-        //navigate(-1);
     }
 
     const closeIngModal = () => {
