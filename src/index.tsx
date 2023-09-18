@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { rootReducer } from './services/reducers';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { socketMiddleware } from './services/middleware/socketMiddleware';
 
 
@@ -33,9 +33,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HashRouter>
+      <BrowserRouter>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
