@@ -1,5 +1,6 @@
 {
   "name": "react-burger",
+  "homepage": "https://andrey340.github.io/react-burger/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -62,6 +63,5 @@
     "jest": "^27.5.1",
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4"
-  },
-  "homepage": "./"
+  }
 }
