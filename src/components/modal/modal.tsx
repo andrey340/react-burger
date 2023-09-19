@@ -33,7 +33,7 @@ export const Modal: FC<IModal> = ({ title, closeFunc, children }) => {
         <div className={`pt-10 pb-10 pr-10 pl-10 ${styles.modal}`}>
           <div className={styles.head}>
             <span className="text text_type_main-large mr-6">{title}</span>
-            <span className={`text text_type_main-medium ${styles.close}`} onClick={closeFunc}><CloseIcon type="primary" /></span>
+            <span id='closeModal' className={`text text_type_main-medium ${styles.close}`} onClick={closeFunc}><CloseIcon type="primary" /></span>
           </div>
           <div className={styles.content}>
             {children}

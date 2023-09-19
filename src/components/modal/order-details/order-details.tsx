@@ -4,7 +4,7 @@ import styles from './order-details.module.css';
 import { useSelector } from '../../../hooks/useReducer';
 
 const OrderDetails: FC = () => {
-    const order = useSelector((state: any) => state.order.order)
+    const order = useSelector((state) => state.order.order)
     return (
         <>
             <span className="text text_type_digits-large mt-4 mb-8">{order}</span>

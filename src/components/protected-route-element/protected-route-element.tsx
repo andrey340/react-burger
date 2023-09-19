@@ -12,8 +12,8 @@ interface IProtected {
 
 export const ProtectedRouteElement: FC<IProtected> = ({ element, notAuth = false }) => {
 
-    const isUserAuth = useSelector((state: any) => state.user.isUserAuth);
-    const isLoading = useSelector((state: any) => state.user.isLoading);
+    const isUserAuth = useSelector((state) => state.user.isUserAuth);
+    const isLoading = useSelector((state) => state.user.isLoading);
 
     const cookie = getCookie('token');
     const dispatch = useDispatch();

@@ -36,7 +36,7 @@ export const IngredientCard: FC<ICard> = ({ item, modalOpen }) => {
     const count = (bun._id === item._id) ? 2 : fillings.filter((el: { _id: string; }) => el._id === item._id).length
 
     return (
-        <li ref={ref} className={styles.li} onClick={handleClick} style={{ opacity }}>
+        <li id={item._id} ref={ref} className={styles.li} onClick={handleClick} style={{ opacity }}>
             {count !== 0 && <Counter count={count} size="default" />}
             <img className="ml-4 mr-4" src={item.image} alt={item.name} />
             <p className={`mt-1 mb-1 text text_type_digits-default ${styles.price}`} >{item.price} <CurrencyIcon type="primary" /></p>

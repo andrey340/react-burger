@@ -13,7 +13,7 @@ export const Constructor: FC = () => {
       <main className={styles.main}>
             <DndProvider backend={HTML5Backend}>
               <BurgerIngredients />
-              <WithModalConstructor />
+              <WithModalConstructor modalType='order'/>
             </DndProvider>
       </main>
   );

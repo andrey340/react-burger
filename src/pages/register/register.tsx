@@ -1,5 +1,5 @@
 import React, { useState, FC, FormEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/useReducer';
 import { FormEncType, useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -12,7 +12,7 @@ export const Register: FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const regError = useSelector((state: any) => state.user.requestError)
+    const regError = useSelector((state) => state.user.requestError)
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,7 +22,6 @@ export const Register: FC = () => {
         e.preventDefault();
 
         dispatch(
-             //@ts-ignore
             userApi(
                 'register',
                 {

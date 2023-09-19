@@ -9,7 +9,7 @@ export const Edit: FC = () => {
 
     const dispatch = useDispatch();
 
-    const user = useSelector((state: any) => state.user.user)
+    const user = useSelector((state) => state.user.user)
 
     const [isActiveName, setActiveName] = useState(false);
     const [isActiveEmail, setActiveEmail] = useState(false);
@@ -31,15 +31,13 @@ export const Edit: FC = () => {
     const emailInput = React.createRef<HTMLInputElement>();
 
     const editInput = (name: string) => {
-        let curEl = '';
+        let curEl: HTMLInputElement | null = null;
         switch (name) {
             case 'name':
-                //@ts-ignore
                 curEl = nameInput.current
                 setActiveName(true);
                 break;
             case 'email':
-                //@ts-ignore
                 curEl = emailInput.current
                 setActiveEmail(true);
                 break;
@@ -47,8 +45,7 @@ export const Edit: FC = () => {
                 setActivePass(true);
                 break;
         }
-//@ts-ignore
-        if( curEl !== '' ) setTimeout(() => curEl.focus(), 0)
+        if( curEl !== null ) setTimeout(() => curEl!.focus(), 0)
         
     }
 
@@ -66,7 +63,6 @@ export const Edit: FC = () => {
         e.preventDefault();
     
         dispatch(
-            //@ts-ignore
           userApi(
             'edit',
             {
@@ -117,8 +113,6 @@ export const Edit: FC = () => {
                     value={passValue} 
                     disabled={!isActivePass} 
                     onChange={e => setPassValue(e.target.value)} 
-                    //@ts-ignore
-                    onIconClick={() => editInput('password')} 
                     name="password" placeholder="Пароль" 
                     icon="EditIcon" 
                     extraClass="mb-6" 

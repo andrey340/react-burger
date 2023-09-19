@@ -8,7 +8,7 @@ export type TOrderState = {
     orderFailed: boolean;
 }
 
-const checkoutInitialState = {
+export const checkoutInitialState = {
     order: 0,
     orderRequest: false,
     orderFailed: false,
@@ -30,7 +30,6 @@ export const orderReducer = (state = checkoutInitialState, action: TOrderActions
                 ...state,
                 orderRequest: false,
                 orderFailed: false,
-                //@ts-ignore
                 order: action.data
             };
         }

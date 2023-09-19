@@ -10,7 +10,7 @@ export type TWSState = {
     error?: Event;
 }
 
-const checkoutInitialState: TWSState = {
+export const checkoutInitialState: TWSState = {
     wsConnected: false,
     orders: [],
     total: 0,

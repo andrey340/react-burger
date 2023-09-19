@@ -8,7 +8,7 @@ export type TIngredientState = {
     ingredientsFailed: boolean;
 }
 
-const checkoutInitialState: TIngredientState = {
+export const checkoutInitialState: TIngredientState = {
     ingredients: [],
     ingredientsRequest: true,
     ingredientsFailed: false,
@@ -26,7 +26,6 @@ export const ingredientsReducer = (state = checkoutInitialState, action: TIngred
             return {
                 ...state,
                 ingredientsFailed: false,
-                //@ts-ignore
                 ingredients: action.data,
                 ingredientsRequest: false
             };

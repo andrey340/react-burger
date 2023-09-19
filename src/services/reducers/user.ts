@@ -41,7 +41,7 @@ export type TUserState = {
     user: {email: string; name: string};
 }
 
-const checkoutInitialState = {
+export const checkoutInitialState = {
     isUserAuth: false,
     isLoading: false,
     requestError: '',
@@ -77,7 +77,6 @@ export const userReducer = (state = checkoutInitialState, action: TUserActions):
                 ...state,
                 isLoading: false,
                 isUserAuth: true,
-                //@ts-ignore
                 user: action.data.user,
                 requestError: ''
             };
@@ -117,7 +116,6 @@ export const userReducer = (state = checkoutInitialState, action: TUserActions):
                 ...state,
                 isLoading: false,
                 isUserAuth: false,
-                 //@ts-ignore
                 requestError: action.data
             };
         }

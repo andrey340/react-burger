@@ -27,8 +27,7 @@ const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(wsUrl)
 export const store = createStore(rootReducer, enhancer);
 
 const root = ReactDOM.createRoot(
-  //@ts-ignore
-  document.getElementById('root')
+  document.getElementById('root')!
 );
 
 root.render(

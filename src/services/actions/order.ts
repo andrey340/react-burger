@@ -7,14 +7,17 @@ export const GET_ORDER_FAILED: 'GET_ORDER_FAILED' = 'GET_ORDER_FAILED';
 
 export interface IOrderReqAction {
     readonly type: typeof GET_ORDER_REQUEST;
+    readonly data?: any;
 }
 
 export interface IOrderSuccessAction {
     readonly type: typeof GET_ORDER_SUCCESS;
+    readonly data?: any;
 }
 
 export interface IOrderFailedAction {
     readonly type: typeof GET_ORDER_FAILED;
+    readonly data?: any;
 }
 
 export type TOrderActions = IOrderReqAction | IOrderSuccessAction | IOrderFailedAction;

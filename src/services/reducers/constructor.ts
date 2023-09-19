@@ -10,9 +10,10 @@ import { TConstructorActions } from "../actions/constructor";
 export type TConstructorState = {
         bun: Iingredient;
         filling: Iingredient[];
+        constructorOrder: {}
   };
 
-  const checkoutInitialState: TConstructorState = {
+export const checkoutInitialState: TConstructorState = {
     bun:  {
         _id: "",
         name: "",
@@ -28,6 +29,7 @@ export type TConstructorState = {
         __v: 0
     },
     filling: [],
+    constructorOrder: {},
 
 };  
 
@@ -37,7 +39,6 @@ export const constructorReducer = (state = checkoutInitialState, action: TConstr
             if (action.item.type === 'bun') {
                 return {
                     ...state,
-                    //@ts-ignore
                     ...state.constructorOrder,
                     bun: action.item,
 
@@ -45,7 +46,6 @@ export const constructorReducer = (state = checkoutInitialState, action: TConstr
             } else {
                 return {
                     ...state,
-                    //@ts-ignore
                     ...state.constructorOrder,
                     filling: [...state.filling, action.item],
                 }
@@ -55,7 +55,6 @@ export const constructorReducer = (state = checkoutInitialState, action: TConstr
         case DEL_FROM_CONSTRUCTOR: {
             return {
                 ...state,
-                //@ts-ignore
                 ...state.constructorOrder,
                 filling: [...state.filling].filter((item, index) => index !== action.index),
             }
@@ -68,7 +67,6 @@ export const constructorReducer = (state = checkoutInitialState, action: TConstr
 
             return {
                 ...state,
-                //@ts-ignore
                 ...state.constructorOrder,
                 filling: newArray,
 

@@ -1,7 +1,7 @@
 import React, { useState, FC, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/useReducer';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { userApi } from '../../services/actions/user';
 import styles from './forgot-password.module.css';
@@ -14,13 +14,12 @@ export const ForgotPassword: FC = () => {
 
     const [email, setEmail] = useState('');
 
-    const forgotError = useSelector((state: any) => state.user.requestError)
+    const forgotError = useSelector((state) => state.user.requestError)
 
     const forgotPassFormSend = async (e: FormEvent) => {
         e.preventDefault();
 
         dispatch(
-           //@ts-ignore
             userApi(
                 'forgot',
                 {

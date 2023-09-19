@@ -13,7 +13,7 @@ const WithModalIngredientCard = withModal(IngredientCard)
 
 export const BurgerIngredients: FC = () => {
 
-  const ingredients = useSelector((store: any) => store.ingredients.ingredients)
+  const ingredients = useSelector((store) => store.ingredients.ingredients)
   const buns = useMemo(() => ingredients.filter((item: { type: string; }) => item.type === 'bun'), [ingredients]);
   const sauces = useMemo(() => ingredients.filter((item: { type: string; }) => item.type === 'sauce'), [ingredients]);
   const mains = useMemo(() => ingredients.filter((item: { type: string; }) => item.type === 'main'), [ingredients]);
@@ -48,7 +48,7 @@ export const BurgerIngredients: FC = () => {
             <h2 className='text text_type_main-medium mb-4'>Булки</h2>
             <ul className={styles.ul}>
               {buns.map((elem: Iingredient) => (
-                <WithModalIngredientCard key={elem._id} item={elem} />
+                <WithModalIngredientCard key={elem._id} item={elem} modalType='ingredient'/>
               ))}
             </ul>
           </div>
@@ -58,7 +58,7 @@ export const BurgerIngredients: FC = () => {
             <h2 className='text text_type_main-medium mb-4'>Начинки</h2>
             <ul className={styles.ul}>
               {mains.map((elem: Iingredient) => (
-                <WithModalIngredientCard key={elem._id} item={elem} />
+                <WithModalIngredientCard key={elem._id} item={elem} modalType='ingredient'/>
               ))}
             </ul>
           </div>
@@ -68,7 +68,7 @@ export const BurgerIngredients: FC = () => {
             <h2 className='text text_type_main-medium mb-4'>Соусы</h2>
             <ul className={styles.ul}>
               {sauces.map((elem: Iingredient) => (
-                <WithModalIngredientCard key={elem._id} item={elem} />
+                <WithModalIngredientCard key={elem._id} item={elem} modalType='ingredient'/>
               ))}
             </ul>
           </div>

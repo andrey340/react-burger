@@ -1,5 +1,5 @@
 import React, { useState, FC, FormEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../hooks/useReducer';
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { userApi } from '../../services/actions/user';
@@ -14,14 +14,13 @@ export const Login: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const loginError = useSelector((state: any) => state.user.requestError)
+  const loginError = useSelector((state) => state.user.requestError)
 
 
   const loginFormSend  = async (e: FormEvent) => {
     e.preventDefault();
     
-    dispatch(
-      //@ts-ignore
+    dispatch(      
       userApi(
         'login',
         {
@@ -33,7 +32,6 @@ export const Login: FC = () => {
     )
     
   }
-
 
 
   return (

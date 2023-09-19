@@ -31,7 +31,7 @@ export const ProfileOrders: FC = () => {
         <div className={styles.container}>
                 <div className={`p-2 ${styles.orders} ${styles.scrollbar}`}>
                     {orders.slice(0).reverse().map((item: IFeedItem, index: React.Key) => (
-                        <WithModalOrder key={index} item={item} />
+                        <WithModalOrder key={index} item={item} modalType='feed'/>
                     )
                     )}
                 </div>

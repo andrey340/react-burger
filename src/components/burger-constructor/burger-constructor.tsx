@@ -17,7 +17,7 @@ interface IConstructor {
 
 
 export const BurgerConstructor: FC<IConstructor> = ({ modalOpen }) => {
-  const isAuth = useSelector((state: any) => state.user.isUserAuth);
+  const isAuth = useSelector((state) => state.user.isUserAuth);
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
@@ -37,8 +37,8 @@ export const BurgerConstructor: FC<IConstructor> = ({ modalOpen }) => {
 
   }
 
-  const bun = useSelector((state: any) => state.constructorOrder.bun)
-  const filling = useSelector((state: any) => state.constructorOrder.filling);
+  const bun = useSelector((state) => state.constructorOrder.bun)
+  const filling = useSelector((state) => state.constructorOrder.filling);
 
 
 
@@ -64,7 +64,7 @@ export const BurgerConstructor: FC<IConstructor> = ({ modalOpen }) => {
   );
 
 
-  const totalCost = (Object.keys(bun).length === 0) ? 0 : filling.reduce((acc: number, cur: any) => acc + cur.price, 0) + bun.price * 2;
+  const totalCost = (Object.keys(bun).length === 0) ? 0 : filling.reduce((acc: number, cur: Iingredient) => acc + cur.price, 0) + bun.price * 2;
 
 
   const [{ isHover }, dropTarget] = useDrop({
@@ -129,7 +129,7 @@ export const BurgerConstructor: FC<IConstructor> = ({ modalOpen }) => {
       <div className={`mt-10 ${styles.total}`}>
         <p className="text text_type_digits-medium mr-2">{totalCost}</p>
         <CurrencyIcon type="primary" />
-        <Button htmlType="button" type="primary" size="large" extraClass='ml-10' onClick={handleClick} disabled={bunAdded ? false : true}>
+        <Button id='orderBtn' htmlType="button" type="primary" size="large" extraClass='ml-10' onClick={handleClick} disabled={bunAdded ? false : true}>
           Оформить заказ
         </Button>
       </div>

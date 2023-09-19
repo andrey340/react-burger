@@ -1,5 +1,5 @@
 import React, { FC, FormEvent } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../hooks/useReducer';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { userApi } from '../../services/actions/user';
 import styles from './profile.module.css';
@@ -14,7 +14,6 @@ export const Profile: FC = () => {
         e.preventDefault();
     
         dispatch(
-          //@ts-ignore
           userApi(
             'logout',
             {
